@@ -1221,7 +1221,7 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
         </div>
 
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2024 International Fleet Solutions. All rights reserved.</p>
+          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2026 International Fleet Solutions. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Accessibility"].map((i) => (
               <a key={i} href="#" className="text-white/50 text-xs hover:text-white/45 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{i}</a>

@@ -21,11 +21,11 @@ import {
   Clock,
   Send,
 } from "lucide-react";
+import { auto } from "@popperjs/core"; 
 
 // ─── Brand constants ─────────────────────────────────────────────────────────
 const EMERALD = "#2D8A6B";
 const CHARCOAL = "#111111";
-
 // ─── Image library ───────────────────────────────────────────────────────────
 const IMG = {
   // Hero cycling backgrounds
@@ -193,20 +193,7 @@ function Logo({ reversed = false }: { reversed?: boolean }) {
   const textColor = reversed ? "#ffffff" : CHARCOAL;
   return (
     <div className="flex items-center gap-2.5" style={{ fontFamily: "Montserrat, sans-serif" }}>
-      <div
-        className="flex items-center justify-center w-9 h-9 rounded-sm text-white text-xs font-black"
-        style={{ background: EMERALD, letterSpacing: "0.1em" }}
-      >
-        IFS
-      </div>
-      <div className="flex flex-col leading-none">
-        <span className="text-xs font-semibold tracking-[0.16em] uppercase" style={{ color: EMERALD }}>
-          International Fleet
-        </span>
-        <span className="text-sm font-bold tracking-[0.06em] uppercase" style={{ color: textColor }}>
-          Solutions
-        </span>
-      </div>
+      <img src="/ifs-logo.png" alt="IFS logo" width={130} className=" " />
     </div>
   );
 }
@@ -251,7 +238,7 @@ function CTAButton({
 }
 
 // ─── NAV ─────────────────────────────────────────────────────────────────────
-function Nav({ onNavigate, currentPage }: { onNavigate: (page: string) => void; currentPage: string }) {
+function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (page: string) => void; currentPage: string; onRequestEstimate: () => void }) {
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
@@ -307,7 +294,7 @@ function Nav({ onNavigate, currentPage }: { onNavigate: (page: string) => void; 
           <a href="tel:+18005551234" className="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5">
             <Phone size={13} /> <span className="font-medium">1-800-IFS-FLEET</span>
           </a>
-          <CTAButton onClick={() => handleLink("#contact")} size="sm">
+          <CTAButton onClick={onRequestEstimate} size="sm">
             Get an Estimate <ArrowRight size={13} />
           </CTAButton>
         </div>
@@ -336,7 +323,7 @@ function Nav({ onNavigate, currentPage }: { onNavigate: (page: string) => void; 
 }
 
 // ─── HERO ─────────────────────────────────────────────────────────────────────
-function Hero() {
+function Hero({onRequestEstimate}:{onRequestEstimate: () => void}) {
   const [bgIndex, setBgIndex] = useState(0);
   const bgImages = [IMG.heroBg1, IMG.heroBg2, IMG.heroBg3];
 
@@ -454,7 +441,7 @@ function Hero() {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <CTAButton href="#contact" size="lg">
+            <CTAButton onClick={onRequestEstimate} size="lg" >
               Request Enterprise Estimate <ArrowRight size={15} />
             </CTAButton>
             <CTAButton href="#services" variant="outline" size="lg">
@@ -510,7 +497,7 @@ function Hero() {
                 <div className="flex items-center gap-3">
                   <div className="w-2 h-2 rounded-full animate-pulse" style={{ background: EMERALD }} />
                   <span className="text-white text-xs font-semibold" style={{ fontFamily: "Montserrat, sans-serif" }}>
-                    Certified Master PDR Technician
+                    Certified Master PDR Technicians
                   </span>
                 </div>
                 <p className="text-white/45 text-xs mt-1.5" style={{ fontFamily: "Inter, sans-serif" }}>
@@ -670,7 +657,7 @@ function Services() {
 }
 
 // ─── WHO WE SERVE ────────────────────────────────────────────────────────────
-function WhoWeServe() {
+function WhoWeServe({onRequestEstimate}:{onRequestEstimate: () => void}) {
   const clients = [
     "Auto Manufacturers", "National Fleet Operators", "Franchise Dealerships",
     "Rental Car Companies", "Corporate Fleets", "Insurance Carriers",
@@ -696,7 +683,9 @@ function WhoWeServe() {
               When your inventory represents hundreds of millions in assets and every idle day costs revenue,
               you need a partner — not a vendor.
             </p>
-            <CTAButton href="#contact" size="md">Schedule a Consultation <ArrowRight size={14} /></CTAButton>
+            <CTAButton onClick={onRequestEstimate} size="md">
+              Schedule a Consultation <ArrowRight size={14} />
+            </CTAButton>
           </FadeUp>
           <FadeUp delay={0.15} className="grid grid-cols-2 gap-3">
             {clients.map((c) => (
@@ -956,7 +945,7 @@ function Contact() {
             </p>
 
             {/* Facility image */}
-            <div className="overflow-hidden rounded-sm bg-gray-200 mb-8 relative" style={{ height: 260 }}>
+            {/* <div className="overflow-hidden rounded-sm bg-gray-200 mb-8 relative" style={{ height: 260 }}>
               <img
                 src={IMG.facility}
                 alt="IFS state-of-the-art PDR repair facility with polished floors and modern equipment"
@@ -969,7 +958,7 @@ function Contact() {
                   IFS Fleet Repair Facility
                 </span>
               </div>
-            </div>
+            </div> */}
 
             <div className="space-y-4">
               {[
@@ -1081,7 +1070,8 @@ function Contact() {
 }
 
 // ─── CTA BAND ────────────────────────────────────────────────────────────────
-function CTABand() {
+function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
+  
   return (
     <section className="py-10 lg:py-20 relative overflow-hidden" style={{ background: EMERALD }}>
       <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 12px)" }} />
@@ -1096,11 +1086,11 @@ function CTABand() {
         </div>
         <div className="flex flex-col sm:flex-row gap-4">
           <button
-            onClick={() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" })}
+            onClick={onRequestEstimate}
             className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold rounded-sm hover:shadow-xl active:scale-[0.98] transition-all"
             style={{ background: "#fff", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}
           >
-            Request Estimate <ArrowRight size={14} />
+            Request Estimates <ArrowRight size={14} />
           </button>
           <a href="tel:+18005551234" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
             <Phone size={14} /> 1-800-IFS-FLEET
@@ -1193,7 +1183,7 @@ function Footer() {
         </div>
 
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2024 International Fleet Solutions. All rights reserved.</p>
+          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2026 International Fleet Solutions. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Accessibility"].map((i) => (
               <a key={i} href="#" className="text-white/50 text-xs hover:text-white/45 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{i}</a>
@@ -1205,10 +1195,13 @@ function Footer() {
   );
 }
 
+
+
+
 // ─── ROOT ────────────────────────────────────────────────────────────────────
 export default function App() {
   const [page, setPage] = useState<"home" | "about">("home");
-
+  const [modalOpen, setModalOpen] = useState(false);
   const navigate = (target: string) => {
     if (target === "about") {
       setPage("about");
@@ -1218,9 +1211,17 @@ export default function App() {
     }
   };
 
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
+  const [sent, setSent] = useState(false);
+
+  const submit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setSent(true);
+  };
+
   return (
     <div className="min-h-screen" style={{ fontFamily: "Inter, sans-serif" }}>
-      <Nav onNavigate={navigate} currentPage={page} />
+      <Nav onNavigate={navigate} currentPage={page} onRequestEstimate={() => setModalOpen(true)} />
       {page === "about" ? (
         <>
           <AboutPage onGoHome={() => { navigate("home"); setTimeout(() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }), 120); }} />
@@ -1228,17 +1229,114 @@ export default function App() {
         </>
       ) : (
         <main>
-          <Hero />
+          <Hero onRequestEstimate={() => setModalOpen(true)}/>
           <StatsBar />
           <Services />
-          <WhoWeServe />
+          <WhoWeServe onRequestEstimate={() => setModalOpen(true)} />
           <Benefits />
           <Testimonials />
           <Contact />
-          <CTABand />
+          <CTABand onRequestEstimate={() => setModalOpen(true)}/>
           <Footer />
         </main>
       )}
+
+      {
+        modalOpen && (
+          <div
+            className="fixed inset-0 z-50 flex items-center justify-center p-4"
+            style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
+            onClick={(e) => e.target === e.currentTarget && setModalOpen(false)}
+          >
+            <div
+              className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-sm"
+              style={{ background: "#fff" }}
+            >
+              {/* Header */}
+              <div className="flex items-center justify-between px-2 lg:px-8 py-4 border-b" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+                <div>
+                  <h2 className="text-lg font-bold" style={{ color: CHARCOAL, fontFamily: "Montserrat, sans-serif" }}>
+                    Request an Estimate
+                  </h2>
+                  <p className="text-xs mt-0.5" style={{ color: "#888", fontFamily: "Inter, sans-serif" }}>
+                    Enterprise fleet & hail recovery
+                  </p>
+                </div>
+                <button
+                  onClick={() => setModalOpen(false)}
+                  className="w-8 h-8 flex items-center justify-center rounded-sm transition-colors hover:bg-black/5"
+                >
+                  <X size={16} color={CHARCOAL} />
+                </button>
+              </div>
+
+              {/* Form */}
+              <div className="px-2 lg:px-8 py-6">
+                {/* 👇 apna existing form yahan paste karo */}
+                <form onSubmit={submit} className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    {[
+                      { key: "name", label: "Full Name", placeholder: "James Harlow", col: 1 },
+                      { key: "company", label: "Company / Organization", placeholder: "Acme Fleet Corp.", col: 1 },
+                    ].map((f) => (
+                      <div key={f.key}>
+                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>{f.label}</label>
+                        <input
+                          type="text"
+                          placeholder={f.placeholder}
+                          value={form[f.key as keyof typeof form]}
+                          onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
+                          required
+                          className="w-full px-4 py-3 text-sm rounded-sm border outline-none focus:ring-2 transition-all"
+                          style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif", focusRingColor: EMERALD } as React.CSSProperties}
+                        />
+                      </div>
+                    ))}
+                  </div>
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Email Address</label>
+                      <input type="email" placeholder="j.harlow@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }} />
+                    </div>
+                    <div>
+                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Phone Number</label>
+                      <input type="tel" placeholder="(555) 000-0000" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }} />
+                    </div>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Estimated Fleet / Unit Count</label>
+                    <select value={form.fleet} onChange={(e) => setForm({ ...form, fleet: e.target.value })} className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all bg-white" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif", color: form.fleet ? CHARCOAL : "#aaa" }}>
+                      <option value="" disabled>Select unit count</option>
+                      {["Under 50 units", "50–250 units", "250–1,000 units", "1,000–5,000 units", "5,000+ units"].map((o) => <option key={o} value={o}>{o}</option>)}
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Tell Us About Your Situation</label>
+                    <textarea
+                      rows={4}
+                      placeholder="Describe the hail event, affected units, location, timeline requirements..."
+                      value={form.message}
+                      onChange={(e) => setForm({ ...form, message: e.target.value })}
+                      className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all resize-none"
+                      style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }}
+                    />
+                  </div>
+                  <button
+                    type="submit"
+                    className="w-full flex items-center justify-center gap-2 py-3.5 text-sm font-semibold text-white rounded-sm transition-all hover:brightness-110 active:scale-[0.99]"
+                    style={{ background: EMERALD, fontFamily: "Montserrat, sans-serif" }}
+                  >
+                    Submit Enterprise Request <Send size={14} />
+                  </button>
+                  <p className="text-center text-xs" style={{ color: "#bbb", fontFamily: "Inter, sans-serif" }}>
+                    Response within 2 business hours · Emergency line available 24/7
+                  </p>
+                </form>
+              </div>
+            </div>
+          </div>
+        )
+      }
     </div>
   );
 }

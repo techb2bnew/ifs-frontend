@@ -1,6 +1,11 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
 import AboutPage from "./AboutPage";
+import ServicesPage from "./ServicesPage";
+import WhoWeServePage from "./WhoWeServePage";
+import TestimonialsPage from "./TestimonialsPage";
+import ContactPage from "./ContactPage";
+import CertificationsPage from "./CertificationsPage";
 import {
   Menu,
   X,
@@ -21,11 +26,11 @@ import {
   Clock,
   Send,
 } from "lucide-react";
-import { auto } from "@popperjs/core"; 
 
 // ─── Brand constants ─────────────────────────────────────────────────────────
 const EMERALD = "#2D8A6B";
 const CHARCOAL = "#111111";
+
 // ─── Image library ───────────────────────────────────────────────────────────
 const IMG = {
   // Hero cycling backgrounds
@@ -57,11 +62,12 @@ const IMG = {
 
 // ─── Data ────────────────────────────────────────────────────────────────────
 const navLinks = [
-  { label: "Services", href: "#services" },
-  { label: "Who We Serve", href: "#who-we-serve" },
+  { label: "Services", href: "services" },
+  { label: "Who We Serve", href: "who-we-serve" },
+  { label: "Testimonials", href: "testimonials" },
+  { label: "Certifications", href: "certifications" },
   { label: "About Us", href: "about" },
-  { label: "Testimonials", href: "#testimonials" },
-  { label: "Contact", href: "#contact" },
+  { label: "Contact", href: "contact" },
 ];
 
 const stats = [
@@ -193,7 +199,9 @@ function Logo({ reversed = false }: { reversed?: boolean }) {
   const textColor = reversed ? "#ffffff" : CHARCOAL;
   return (
     <div className="flex items-center gap-2.5" style={{ fontFamily: "Montserrat, sans-serif" }}>
-      <img src="/ifs-logo.png" alt="IFS logo" width={130} className=" " />
+      <div className="flex items-center gap-2.5" style={{ fontFamily: "Montserrat, sans-serif" }}>
+        <img src="/ifs-logo.png" alt="IFS logo" width={130} className=" " />
+      </div>
     </div>
   );
 }
@@ -282,8 +290,8 @@ function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (pa
             <button
               key={l.label}
               onClick={() => handleLink(l.href)}
-              className="text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer text-white/50 hover:text-[#fff]"
-              style={{ color: currentPage === "about" && l.href === "about" ? "#fff" : "text-white" }}
+              className="text-sm font-medium tracking-wide transition-colors duration-200"
+              style={{ color: (currentPage === l.href) ? "#fff" : "rgba(255,255,255,0.65)" }}
             >
               {l.label}
             </button>
@@ -313,7 +321,7 @@ function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (pa
               </button>
             ))}
             <div className="pt-4 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-              <CTAButton onClick={() => handleLink("#contact")} size="md">Get an Estimate <ArrowRight size={13} /></CTAButton>
+              <CTAButton onClick={onRequestEstimate} size="md">Get an Estimate <ArrowRight size={13} /></CTAButton>
             </div>
           </div>
         </div>
@@ -323,7 +331,7 @@ function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (pa
 }
 
 // ─── HERO ─────────────────────────────────────────────────────────────────────
-function Hero({onRequestEstimate}:{onRequestEstimate: () => void}) {
+function Hero({ onRequestEstimate }: { onRequestEstimate: () => void }) {
   const [bgIndex, setBgIndex] = useState(0);
   const bgImages = [IMG.heroBg1, IMG.heroBg2, IMG.heroBg3];
 
@@ -441,7 +449,7 @@ function Hero({onRequestEstimate}:{onRequestEstimate: () => void}) {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.5 }}
           >
-            <CTAButton onClick={onRequestEstimate} size="lg" >
+            <CTAButton onClick={onRequestEstimate} size="lg">
               Request Enterprise Estimate <ArrowRight size={15} />
             </CTAButton>
             <CTAButton href="#services" variant="outline" size="lg">
@@ -558,7 +566,7 @@ function StatsBar() {
 // ─── SERVICES ────────────────────────────────────────────────────────────────
 function Services() {
   return (
-    <section id="services" className="bg-white py-10 lg:py-28">
+    <section id="services" className="py-10 lg:py-28 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         {/* Header */}
@@ -657,7 +665,7 @@ function Services() {
 }
 
 // ─── WHO WE SERVE ────────────────────────────────────────────────────────────
-function WhoWeServe({onRequestEstimate}:{onRequestEstimate: () => void}) {
+function WhoWeServe({ onRequestEstimate }: { onRequestEstimate: () => void }) {
   const clients = [
     "Auto Manufacturers", "National Fleet Operators", "Franchise Dealerships",
     "Rental Car Companies", "Corporate Fleets", "Insurance Carriers",
@@ -683,9 +691,7 @@ function WhoWeServe({onRequestEstimate}:{onRequestEstimate: () => void}) {
               When your inventory represents hundreds of millions in assets and every idle day costs revenue,
               you need a partner — not a vendor.
             </p>
-            <CTAButton onClick={onRequestEstimate} size="md">
-              Schedule a Consultation <ArrowRight size={14} />
-            </CTAButton>
+            <CTAButton onClick={onRequestEstimate} size="md">Schedule a Consultation <ArrowRight size={14} /></CTAButton>
           </FadeUp>
           <FadeUp delay={0.15} className="grid grid-cols-2 gap-3">
             {clients.map((c) => (
@@ -982,7 +988,7 @@ function Contact() {
 
           {/* Right: form */}
           <FadeUp delay={0.15}>
-            <div className="bg-white rounded-sm border p-2 lg:p-8 lg:p-10" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+            <div className="bg-white rounded-sm border p-8 lg:p-10" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
               {sent ? (
                 <div className="flex flex-col items-center justify-center h-full py-16 text-center">
                   <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(45,138,107,0.1)" }}>
@@ -1071,9 +1077,8 @@ function Contact() {
 
 // ─── CTA BAND ────────────────────────────────────────────────────────────────
 function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
-  
   return (
-    <section className="py-10 lg:py-20 relative overflow-hidden" style={{ background: EMERALD }}>
+    <section className="py-20 relative overflow-hidden" style={{ background: EMERALD }}>
       <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 12px)" }} />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-10">
         <div>
@@ -1090,7 +1095,7 @@ function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
             className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold rounded-sm hover:shadow-xl active:scale-[0.98] transition-all"
             style={{ background: "#fff", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}
           >
-            Request Estimates <ArrowRight size={14} />
+            Request Estimate <ArrowRight size={14} />
           </button>
           <a href="tel:+18005551234" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
             <Phone size={14} /> 1-800-IFS-FLEET
@@ -1102,9 +1107,15 @@ function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
 }
 
 // ─── FOOTER ──────────────────────────────────────────────────────────────────
-function Footer() {
+function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
   const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
-
+  const companyLinks: { label: string; href: string }[] = [
+    { label: "About Us", href: "about" },
+    { label: "Who We Serve", href: "who-we-serve" },
+    { label: "Testimonials", href: "testimonials" },
+    { label: "Certifications", href: "certifications" },
+    { label: "Contact", href: "contact" },
+  ];
   const cols: Record<string, string[]> = {
     Services: ["Hail Event Response", "Fleet Repair Programs", "Paintless Dent Repair", "Dealership Partnerships", "OEM Programs"],
     Company: ["About IFS", "Leadership Team", "Certifications", "Careers", "Press"],
@@ -1118,7 +1129,7 @@ function Footer() {
   return (
     <footer style={{ background: "#0a0a0a" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="py-8 lg:py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <div className="py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Brand column — same on all screens */}
             <div className="lg:col-span-1">
@@ -1135,12 +1146,26 @@ function Footer() {
             {/* Desktop: normal grid columns */}
             <div className="hidden lg:contents">
               {Object.entries(cols).map(([section, links]) => (
-                <div key={section}>
+                <div key={section}> 
                   <h4 className="text-xs font-semibold tracking-[0.18em] uppercase mb-5" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>{section}</h4>
+
                   <ul className="space-y-3">
-                    {links.map((l) => (
-                      <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
-                    ))}
+                    {section === "Company"
+                      ? companyLinks.map((l) => (
+                        <li key={l.label}>
+                          <button
+                            onClick={() => { onNavigate(l.href); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left"
+                            style={{ fontFamily: "Inter, sans-serif" }}
+                          >
+                            {l.label}
+                          </button>
+                        </li>
+                      ))
+                      : links.map((l) => (
+                        <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
+                      ))
+                    }
                   </ul>
                 </div>
               ))}
@@ -1171,9 +1196,22 @@ function Footer() {
                     style={{ maxHeight: openSections[section] ? "400px" : "0px" }}
                   >
                     <ul className="space-y-3 pb-4">
-                      {links.map((l) => (
+                       {section === "Company"
+                      ? companyLinks.map((l) => (
+                        <li key={l.label}>
+                          <button
+                            onClick={() => { onNavigate(l.href); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left"
+                            style={{ fontFamily: "Inter, sans-serif" }}
+                          >
+                            {l.label}
+                          </button>
+                        </li>
+                      ))
+                      : links.map((l) => (
                         <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
-                      ))}
+                      ))
+                    }
                     </ul>
                   </div>
                 </div>
@@ -1183,7 +1221,7 @@ function Footer() {
         </div>
 
         <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2026 International Fleet Solutions. All rights reserved.</p>
+          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2024 International Fleet Solutions. All rights reserved.</p>
           <div className="flex gap-6">
             {["Privacy Policy", "Terms of Service", "Accessibility"].map((i) => (
               <a key={i} href="#" className="text-white/50 text-xs hover:text-white/45 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{i}</a>
@@ -1195,49 +1233,53 @@ function Footer() {
   );
 }
 
-
-
-
 // ─── ROOT ────────────────────────────────────────────────────────────────────
 export default function App() {
-  const [page, setPage] = useState<"home" | "about">("home");
+  type Page = "home" | "services" | "who-we-serve" | "testimonials" | "certifications" | "about" | "contact";
+  const [page, setPage] = useState<Page>("home");
   const [modalOpen, setModalOpen] = useState(false);
+  const [sent, setSent] = useState(false);
+  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
+
   const navigate = (target: string) => {
-    if (target === "about") {
-      setPage("about");
+    const pages: Page[] = ["services", "who-we-serve", "testimonials", "certifications", "about", "contact"];
+    if (pages.includes(target as Page)) {
+      setPage(target as Page);
       window.scrollTo({ top: 0, behavior: "smooth" });
     } else {
       setPage("home");
     }
   };
-
-  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
-  const [sent, setSent] = useState(false);
-
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
     setSent(true);
+  };
+  const goToContact = () => {
+    setPage("contact");
+    window.scrollTo({ top: 0, behavior: "smooth" });
   };
 
   return (
     <div className="min-h-screen" style={{ fontFamily: "Inter, sans-serif" }}>
       <Nav onNavigate={navigate} currentPage={page} onRequestEstimate={() => setModalOpen(true)} />
-      {page === "about" ? (
-        <>
-          <AboutPage onGoHome={() => { navigate("home"); setTimeout(() => document.querySelector("#contact")?.scrollIntoView({ behavior: "smooth" }), 120); }} />
-          <Footer />
-        </>
-      ) : (
+
+      {page === "services" && <><ServicesPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
+      {page === "who-we-serve" && <><WhoWeServePage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
+      {page === "testimonials" && <><TestimonialsPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
+      {page === "certifications" && <><CertificationsPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
+      {page === "about" && <><AboutPage onGoHome={goToContact} /><Footer onNavigate={navigate} /></>}
+      {page === "contact" && <><ContactPage /><Footer onNavigate={navigate} /></>}
+      {page === "home" && (
         <main>
-          <Hero onRequestEstimate={() => setModalOpen(true)}/>
+          <Hero onRequestEstimate={() => setModalOpen(true)} />
           <StatsBar />
           <Services />
           <WhoWeServe onRequestEstimate={() => setModalOpen(true)} />
           <Benefits />
           <Testimonials />
           <Contact />
-          <CTABand onRequestEstimate={() => setModalOpen(true)}/>
-          <Footer />
+          <CTABand onRequestEstimate={() => setModalOpen(true)} />
+          <Footer onNavigate={navigate} />
         </main>
       )}
 

@@ -1128,7 +1128,7 @@ function Footer() {
   return (
     <footer style={{ background: "#0a0a0a" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
+        <div className="py-8 lg:py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
           <div className="grid lg:grid-cols-5 gap-12">
             {/* Brand column — same on all screens */}
             <div className="lg:col-span-1">

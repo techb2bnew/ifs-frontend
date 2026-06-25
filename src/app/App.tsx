@@ -290,7 +290,7 @@ function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (pa
             <button
               key={l.label}
               onClick={() => handleLink(l.href)}
-              className="text-sm font-medium tracking-wide transition-colors duration-200"
+              className="text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer text-white/55 hover:text-white"
               style={{ color: (currentPage === l.href) ? "#fff" : "rgba(255,255,255,0.65)" }}
             >
               {l.label}
@@ -1155,7 +1155,7 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
                         <li key={l.label}>
                           <button
                             onClick={() => { onNavigate(l.href); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left"
+                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left cursor-pointer"
                             style={{ fontFamily: "Inter, sans-serif" }}
                           >
                             {l.label}
@@ -1163,7 +1163,7 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
                         </li>
                       ))
                       : links.map((l) => (
-                        <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
+                        <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors cursor-pointer" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
                       ))
                     }
                   </ul>

@@ -245,7 +245,7 @@ function OurStory() {
                 {storyStats.map((s) => (
                   <div
                     key={s.label}
-                    className="flex items-center gap-3 px-4 py-3 rounded-sm border"
+                    className="flex items-center gap-2 px-2 py-3 rounded-sm border"
                     style={{ borderColor: "rgba(0,0,0,0.07)", background: "#fff" }}
                   >
                     <CheckCircle size={14} style={{ color: EMERALD, flexShrink: 0 }} />
@@ -312,7 +312,7 @@ function WhyChooseIFS() {
                 className="grid grid-cols-5 border-b group hover:bg-gray-50 transition-colors"
                 style={{ borderColor: "rgba(0,0,0,0.06)" }}
               >
-                <div className="col-span-2 px-8 py-5 flex items-center gap-3 border-r" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
+                <div className="col-span-2 px-3 py-5 flex items-center gap-3 border-r" style={{ borderColor: "rgba(0,0,0,0.06)" }}>
                   <div className="w-2 h-2 rounded-full flex-shrink-0" style={{ background: EMERALD }} />
                   <span className="text-sm font-bold" style={{ fontFamily: "Montserrat, sans-serif", color: CHARCOAL }}>
                     {row.feature}

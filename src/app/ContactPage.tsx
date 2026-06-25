@@ -153,7 +153,7 @@ export default function ContactPage() {
                 ))}
               </div>
 
-              <div className="bg-white border rounded-sm p-8" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
+              <div className="bg-white border rounded-sm p-6" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
                 {sent ? (
                   <div className="flex flex-col items-center justify-center py-16 text-center">
                     <div className="w-16 h-16 rounded-full flex items-center justify-center mb-5" style={{ background: "rgba(45,138,107,0.1)" }}>

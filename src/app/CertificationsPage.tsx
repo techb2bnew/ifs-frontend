@@ -175,7 +175,7 @@ export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: (
       <section className="py-24" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <FadeUp className="sticky top-28">
+            <FadeUp className="relative lg:sticky top-28">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px" style={{ background: EMERALD }} />
                 <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Technician Credentials</span>

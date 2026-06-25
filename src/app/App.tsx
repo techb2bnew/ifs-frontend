@@ -548,7 +548,7 @@ function StatsBar() {
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid grid-cols-2 lg:grid-cols-4" style={{ borderLeft: "1px solid rgba(0,0,0,0.07)" }}>
           {stats.map((s) => (
-            <div key={s.label} className="px-8 py-10 border-r border-b lg:border-b-0" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
+            <div key={s.label} className="px-4 lg:px-8 py-10 border-r border-b lg:border-b-0" style={{ borderColor: "rgba(0,0,0,0.07)" }}>
               <div className="text-4xl font-black mb-1.5 leading-none" style={{ fontFamily: "Montserrat, sans-serif", color: EMERALD }}>
                 {s.value}
               </div>

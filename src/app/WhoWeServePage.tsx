@@ -156,7 +156,7 @@ export default function WhoWeServePage({ onGetEstimate }: { onGetEstimate: () =>
         const Icon = seg.icon;
         const isEven = idx % 2 === 0;
         return (
-          <section key={seg.id} id={seg.id} className={`py-24 ${isEven ? "bg-white" : ""}`} style={!isEven ? { background: "#f7f8f9" } : {}}>
+          <section key={seg.id} id={seg.id} className={`py-10 lg:py-28 ${isEven ? "bg-white" : ""}`} style={!isEven ? { background: "#f7f8f9" } : {}}>
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <div className={`grid lg:grid-cols-2 gap-16 items-center ${isEven ? "" : ""}`}>
                 {/* Text side */}

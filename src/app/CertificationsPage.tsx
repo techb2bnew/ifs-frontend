@@ -172,10 +172,10 @@ export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: (
       </section>
 
       {/* Technician certifications */}
-      <section className="py-24" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-24" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-start">
-            <FadeUp className="relative lg:sticky top-28">
+            <FadeUp className="relative lg:sticky top-0 lg:top-28">
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px" style={{ background: EMERALD }} />
                 <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Technician Credentials</span>
@@ -214,7 +214,7 @@ export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: (
       </section>
 
       {/* Industry memberships */}
-      <section className="py-24 bg-white">
+      <section className="py-10 lg:py-24 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="mb-14">
             <div className="flex items-center gap-3 mb-4">
@@ -249,7 +249,7 @@ export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: (
       </section>
 
       {/* Awards timeline */}
-      <section className="py-24" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-24" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="mb-14">
             <div className="flex items-center gap-3 mb-4">

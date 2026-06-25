@@ -159,7 +159,7 @@ function HailSection({ onGetEstimate }: { onGetEstimate: () => void }) {
   return (
     <div>
       {/* Intro split */}
-      <section className="py-24 bg-white">
+      <section className="py-10 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             <FadeUp>
@@ -278,7 +278,7 @@ function FleetSection({ onGetEstimate }: { onGetEstimate: () => void }) {
   return (
     <div>
       {/* Hero split */}
-      <section className="py-24 bg-white">
+      <section className="py-10 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center">
             {/* Image */}
@@ -391,7 +391,7 @@ function PDRSection({ onGetEstimate }: { onGetEstimate: () => void }) {
   return (
     <div>
       {/* Intro */}
-      <section className="py-24 bg-white">
+      <section className="py-10 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             <FadeUp>
@@ -455,7 +455,7 @@ function PDRSection({ onGetEstimate }: { onGetEstimate: () => void }) {
       </section>
 
       {/* PDR vs Traditional comparison table */}
-      <section className="py-20" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-28 " style={{ background: "#f7f8f9" }}>
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <FadeUp className="text-center mb-12">
             <Eyebrow label="PDR vs. Traditional Repair" />
@@ -530,7 +530,7 @@ function DealershipSection({ onGetEstimate }: { onGetEstimate: () => void }) {
 
   return (
     <div>
-      <section className="py-24 bg-white">
+      <section className="py-10 lg:py-28 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16 items-center mb-20">
             <FadeUp>

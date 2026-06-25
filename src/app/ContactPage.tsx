@@ -82,7 +82,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main content */}
-      <section className="py-20 bg-white">
+      <section className="py-10 lg:py-20 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16">
 
@@ -248,7 +248,7 @@ export default function ContactPage() {
       </section>
 
       {/* Regional offices */}
-      <section className="py-20" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-20" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="mb-12">
             <div className="flex items-center gap-3 mb-4">

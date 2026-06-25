@@ -295,7 +295,7 @@ function Nav({ onNavigate, currentPage }: { onNavigate: (page: string) => void; 
             <button
               key={l.label}
               onClick={() => handleLink(l.href)}
-              className="text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer hover:text-white"
+              className="text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer text-white/50 hover:text-[#fff]"
               style={{ color: currentPage === "about" && l.href === "about" ? "#fff" : "text-white" }}
             >
               {l.label}

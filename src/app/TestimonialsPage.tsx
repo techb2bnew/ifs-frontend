@@ -124,7 +124,7 @@ export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () 
       </div>
 
       {/* Featured testimonial slider */}
-      <section className="py-10 lg:py-20" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="mb-10">
             <div className="flex items-center gap-3 mb-4">
@@ -186,7 +186,7 @@ export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () 
       </section>
 
       {/* Filter + grid */}
-      <section className="py-10 lg:py-20 bg-white bg-white">
+      <section className="py-10 lg:py-15 bg-white bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-6 mb-12">
             <h2 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.6rem, 2.5vw, 2rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em" }}>
@@ -237,7 +237,7 @@ export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () 
       </section>
 
       {/* Recommendation letter */}
-      <section className="py-10 lg:py-20" style={{ background: "#f7f8f9" }}>
+      <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
         <div className="max-w-5xl mx-auto px-6 lg:px-10">
           <FadeUp className="text-center mb-10">
             <div className="flex items-center justify-center gap-3 mb-4">
@@ -280,7 +280,7 @@ export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () 
       </section>
 
       {/* CTA */}
-      <section className="py-10 lg:py-20 relative overflow-hidden" style={{ background: EMERALD }}>
+      <section className="py-10 lg:py-15 relative overflow-hidden" style={{ background: EMERALD }}>
         <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 12px)" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-10">
           <div>
@@ -293,8 +293,8 @@ export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () 
             <button onClick={onGetEstimate} className="inline-flex items-center gap-2 px-8 py-4 text-sm font-bold rounded-sm hover:shadow-xl active:scale-[0.98] transition-all" style={{ background: "#fff", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>
               Get an Estimate <ArrowRight size={14} />
             </button>
-            <a href="tel:+18005551234" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
-              <Phone size={14} /> 1-800-IFS-FLEET
+            <a href="tel:2399197963" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
+              <Phone size={14} /> 239.919.7963
             </a>
           </div>
         </div>

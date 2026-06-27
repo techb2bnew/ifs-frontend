@@ -299,8 +299,8 @@ function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (pa
         </nav>
 
         <div className="hidden lg:flex items-center gap-5">
-          <a href="tel:+18005551234" className="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5">
-            <Phone size={13} /> <span className="font-medium">1-800-IFS-FLEET</span>
+          <a href="tel:2399197963" className="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5">
+            <Phone size={13} /> <span className="font-medium">239.919.7963</span>
           </a>
           <CTAButton onClick={onRequestEstimate} size="sm">
             Get an Estimate <ArrowRight size={13} />
@@ -566,7 +566,7 @@ function StatsBar() {
 // ─── SERVICES ────────────────────────────────────────────────────────────────
 function Services() {
   return (
-    <section id="services" className="py-10 lg:py-28 bg-white">
+    <section id="services" className="py-10 lg:py-15 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
 
         {/* Header */}
@@ -671,7 +671,7 @@ function WhoWeServe({ onRequestEstimate }: { onRequestEstimate: () => void }) {
     "Rental Car Companies", "Corporate Fleets", "Insurance Carriers",
   ];
   return (
-    <section id="who-we-serve" className="py-10 lg:py-28 relative overflow-hidden" style={{ background: CHARCOAL }}>
+    <section id="who-we-serve" className="py-10 lg:py-15 relative overflow-hidden" style={{ background: CHARCOAL }}>
       <div className="absolute inset-0">
         <img src={IMG.heroBg2} alt="" className="w-full h-full object-cover opacity-10" />
         <div className="absolute inset-0" style={{ background: `linear-gradient(to right, ${CHARCOAL} 40%, rgba(17,17,17,0.85))` }} />
@@ -710,7 +710,7 @@ function WhoWeServe({ onRequestEstimate }: { onRequestEstimate: () => void }) {
 // ─── BENEFITS ────────────────────────────────────────────────────────────────
 function Benefits() {
   return (
-    <section className="py-10 lg:py-28 bg-white">
+    <section className="py-10 lg:py-15 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-16 items-center">
 
@@ -811,7 +811,7 @@ function Testimonials() {
   const t = testimonials[active];
 
   return (
-    <section id="testimonials" className="py-10 lg:py-28 bg-white">
+    <section id="testimonials" className="py-10 lg:py-15 bg-white">
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <FadeUp className="text-center mb-16">
           <SectionEyebrow label="Client Testimonials" />
@@ -933,7 +933,7 @@ function Contact() {
   };
 
   return (
-    <section id="contact" className="py-10 lg:py-28" style={{ background: "#f7f8f9" }}>
+    <section id="contact" className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="grid lg:grid-cols-2 gap-16">
 
@@ -968,9 +968,9 @@ function Contact() {
 
             <div className="space-y-4">
               {[
-                { icon: Phone, label: "Main Line", val: "1-800-IFS-FLEET" },
-                { icon: Phone, label: "Emergency Hail Response", val: "1-800-IFS-911" },
-                { icon: Mail, label: "Enterprise Inquiries", val: "enterprise@ifsfleet.com" },
+                { icon: Phone, label: "Main Line", val: "239.919.7963" },
+                // { icon: Phone, label: "Emergency Hail Response", val: "1-800-IFS-911" },
+                { icon: Mail, label: "Enterprise Inquiries", val: "info@ifshail.com" },
                 { icon: MapPin, label: "Headquarters", val: "Dallas, TX — with 48-state coverage" },
               ].map(({ icon: Icon, label, val }) => (
                 <div key={label} className="flex items-start gap-4">
@@ -1078,7 +1078,7 @@ function Contact() {
 // ─── CTA BAND ────────────────────────────────────────────────────────────────
 function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
   return (
-    <section className="py-20 relative overflow-hidden" style={{ background: EMERALD }}>
+    <section className="py-15 relative overflow-hidden" style={{ background: EMERALD }}>
       <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 12px)" }} />
       <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 flex flex-col lg:flex-row items-center justify-between gap-10">
         <div>
@@ -1097,8 +1097,8 @@ function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
           >
             Request Estimate <ArrowRight size={14} />
           </button>
-          <a href="tel:+18005551234" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
-            <Phone size={14} /> 1-800-IFS-FLEET
+          <a href="tel:2399197963" className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/30 text-white hover:bg-white/10 transition-all" style={{ fontFamily: "Montserrat, sans-serif" }}>
+            <Phone size={14} /> 239.919.7963
           </a>
         </div>
       </div>
@@ -1119,8 +1119,8 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
   const cols: Record<string, string[]> = {
     Services: ["Hail Event Response", "Fleet Repair Programs", "Paintless Dent Repair", "Dealership Partnerships", "OEM Programs"],
     Company: ["About IFS", "Leadership Team", "Certifications", "Careers", "Press"],
-    Resources: ["Case Studies", "Event Response Guide", "Industry Reports", "FAQs", "Blog"],
-    Contact: ["Get an Estimate", "1-800-IFS-FLEET", "enterprise@ifsfleet.com", "Find a Location", "Emergency Line"],
+    // Resources: ["Case Studies", "Event Response Guide", "Industry Reports", "FAQs", "Blog"],
+    Contact: ["Get an Estimate", "239.919.7963", "info@ifshail.com", "Find a Location", "Emergency Line"],
   };
 
   const toggle = (section: string) =>
@@ -1130,7 +1130,7 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
     <footer style={{ background: "#0a0a0a" }}>
       <div className="max-w-7xl mx-auto px-6 lg:px-10">
         <div className="py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-          <div className="grid lg:grid-cols-5 gap-12">
+          <div className="grid lg:grid-cols-4 gap-12">
             {/* Brand column — same on all screens */}
             <div className="lg:col-span-1">
               <Logo reversed />
@@ -1138,8 +1138,9 @@ function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
                 The enterprise standard for catastrophic hail recovery and paintless dent repair.
               </p>
               <div className="flex items-center gap-3 mt-5">
-                <div className="w-8 h-8 rounded-sm flex items-center justify-center text-xs font-black" style={{ background: "rgba(45,138,107,0.15)", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>A+</div>
-                <span className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>BBB Accredited</span>
+                {/* <div className="w-8 h-8 rounded-sm flex items-center justify-center text-xs font-black" style={{ background: "rgba(45,138,107,0.15)", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>A+</div>
+                <span className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>BBB Accredited</span> */}
+                <img src="/blue-seal.png" alt="Better Business Bureau Accredited" className="h-12" />
               </div>
             </div>
 

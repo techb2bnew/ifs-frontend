@@ -156,7 +156,7 @@ export default function WhoWeServePage({ onGetEstimate }: { onGetEstimate: () =>
         const Icon = seg.icon;
         const isEven = idx % 2 === 0;
         return (
-          <section key={seg.id} id={seg.id} className={`py-10 lg:py-28 ${isEven ? "bg-white" : ""}`} style={!isEven ? { background: "#f7f8f9" } : {}}>
+          <section key={seg.id} id={seg.id} className={`py-10 lg:py-15 ${isEven ? "bg-white" : ""}`} style={!isEven ? { background: "#f7f8f9" } : {}}>
             <div className="max-w-7xl mx-auto px-6 lg:px-10">
               <div className={`grid lg:grid-cols-2 gap-16 items-center ${isEven ? "" : ""}`}>
                 {/* Text side */}
@@ -231,7 +231,7 @@ export default function WhoWeServePage({ onGetEstimate }: { onGetEstimate: () =>
       })}
 
       {/* Bottom CTA */}
-      <section className="py-20 relative overflow-hidden" style={{ background: CHARCOAL }}>
+      <section className="py-15 relative overflow-hidden" style={{ background: CHARCOAL }}>
         <div className="absolute inset-0 opacity-[0.04]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(255,255,255,0.3) 0px, rgba(255,255,255,0.3) 1px, transparent 1px, transparent 12px)" }} />
         <div className="relative z-10 max-w-7xl mx-auto px-6 lg:px-10 text-center">
           <div className="flex items-center justify-center gap-3 mb-4">
@@ -252,10 +252,10 @@ export default function WhoWeServePage({ onGetEstimate }: { onGetEstimate: () =>
               style={{ background: EMERALD, color: "#fff", fontFamily: "Montserrat, sans-serif" }}>
               Get a Free Consultation <ArrowRight size={14} />
             </button>
-            <a href="tel:+18005551234"
+            <a href="tel:2399197963"
               className="inline-flex items-center gap-2 px-8 py-4 text-sm font-semibold rounded-sm border border-white/25 text-white hover:bg-white/08 transition-all"
               style={{ fontFamily: "Montserrat, sans-serif" }}>
-              <Phone size={14} /> 1-800-IFS-FLEET
+              <Phone size={14} /> 239.919.7963
             </a>
           </div>
         </div>

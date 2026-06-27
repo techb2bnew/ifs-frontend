@@ -24,9 +24,9 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
 }
 
 const offices = [
-  { city: "Dallas, TX", role: "National Headquarters", phone: "1-800-IFS-FLEET", address: "2100 Fleet Way, Dallas, TX 75201" },
-  { city: "Denver, CO", role: "Mountain Region Hub", phone: "1-800-IFS-FLEET", address: "580 Hail Response Dr, Denver, CO 80202" },
-  { city: "Atlanta, GA", role: "Southeast Region Hub", phone: "1-800-IFS-FLEET", address: "940 Fleet Center Blvd, Atlanta, GA 30301" },
+  { city: "Dallas, TX", role: "National Headquarters", phone: "239.919.7963", address: "2100 Fleet Way, Dallas, TX 75201" },
+  { city: "Denver, CO", role: "Mountain Region Hub", phone: "239.919.7963", address: "580 Hail Response Dr, Denver, CO 80202" },
+  { city: "Atlanta, GA", role: "Southeast Region Hub", phone: "239.919.7963", address: "940 Fleet Center Blvd, Atlanta, GA 30301" },
 ];
 
 export default function ContactPage() {
@@ -82,7 +82,7 @@ export default function ContactPage() {
       </div>
 
       {/* Main content */}
-      <section className="py-10 lg:py-20 bg-white">
+      <section className="py-10 lg:py-15 bg-white">
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16">
 
@@ -102,9 +102,9 @@ export default function ContactPage() {
               {/* Contact cards */}
               <div className="space-y-4 mb-10">
                 {[
-                  { icon: Phone, label: "Main Enterprise Line", val: "1-800-IFS-FLEET", sub: "Mon–Fri 7am–8pm CT" },
-                  { icon: Zap, label: "Emergency Hail Response", val: "1-800-IFS-911", sub: "24/7 · Active events only" },
-                  { icon: Mail, label: "Enterprise Inquiries", val: "enterprise@ifsfleet.com", sub: "Response within 2 business hours" },
+                  { icon: Phone, label: "Main Enterprise Line", val: "239.919.7963", sub: "Mon–Fri 7am–8pm CT" },
+                  // { icon: Zap, label: "Emergency Hail Response", val: "1-800-IFS-911", sub: "24/7 · Active events only" },
+                  { icon: Mail, label: "Enterprise Inquiries", val: "info@ifshail.com", sub: "Response within 2 business hours" },
                   { icon: MapPin, label: "Headquarters", val: "Dallas, TX", sub: "With offices in Denver & Atlanta" },
                   { icon: Clock, label: "Response Guarantee", val: "< 2 Business Hours", sub: "Enterprise estimate response time" },
                 ].map(({ icon: Icon, label, val, sub }) => (
@@ -122,7 +122,7 @@ export default function ContactPage() {
               </div>
 
               {/* Facility images */}
-              <div className="grid grid-cols-2 gap-3">
+              {/* <div className="grid grid-cols-2 gap-3">
                 <div className="overflow-hidden rounded-sm bg-gray-100 relative" style={{ height: 180 }}>
                   <img src={IMG.facility1} alt="IFS primary repair facility" className="w-full h-full object-cover" style={{ filter: "brightness(0.82)" }} />
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,17,0.5), transparent 60%)" }} />
@@ -133,7 +133,7 @@ export default function ContactPage() {
                   <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,17,0.5), transparent 60%)" }} />
                   <span className="absolute bottom-4 left-4 text-white text-xs font-semibold tracking-wider" style={{ fontFamily: "Montserrat, sans-serif" }}>Repair Bay</span>
                 </div>
-              </div>
+              </div> */}
             </FadeUp>
 
             {/* Right: form */}
@@ -248,7 +248,7 @@ export default function ContactPage() {
       </section>
 
       {/* Regional offices */}
-      <section className="py-10 lg:py-20" style={{ background: "#f7f8f9" }}>
+      {/* <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <FadeUp className="mb-12">
             <div className="flex items-center gap-3 mb-4">
@@ -284,8 +284,7 @@ export default function ContactPage() {
               </FadeUp>
             ))}
           </div>
-
-          {/* 48-state coverage callout */}
+ 
           <FadeUp className="mt-8">
             <div className="rounded-sm p-8 flex flex-col sm:flex-row items-center justify-between gap-6" style={{ background: CHARCOAL }}>
               <div className="flex items-center gap-4">
@@ -299,14 +298,14 @@ export default function ContactPage() {
                   </div>
                 </div>
               </div>
-              <a href="tel:+18005551234" className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-sm transition-all hover:brightness-110"
+              <a href="tel:2399197963" className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-sm transition-all hover:brightness-110"
                 style={{ background: EMERALD, color: "#fff", fontFamily: "Montserrat, sans-serif" }}>
-                <Phone size={13} /> 1-800-IFS-FLEET
+                <Phone size={13} /> 239.919.7963
               </a>
             </div>
           </FadeUp>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }

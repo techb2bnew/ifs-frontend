@@ -1,14 +1,8 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
 import { motion, useInView } from "motion/react";
-import AboutPage from "./AboutPage";
-import ServicesPage from "./ServicesPage";
-import WhoWeServePage from "./WhoWeServePage";
-import TestimonialsPage from "./TestimonialsPage";
-import ContactPage from "./ContactPage";
-import CertificationsPage from "./CertificationsPage";
 import {
-  Menu,
-  X,
   ChevronRight,
   ChevronLeft,
   Shield,
@@ -26,10 +20,8 @@ import {
   Clock,
   Send,
 } from "lucide-react";
-
-// ─── Brand constants ─────────────────────────────────────────────────────────
-const EMERALD = "#2D8A6B";
-const CHARCOAL = "#111111";
+import { EMERALD, CHARCOAL, CTAButton } from "@/components/shared";
+import { useEstimateModal } from "@/components/EstimateModal";
 
 // ─── Image library ───────────────────────────────────────────────────────────
 const IMG = {
@@ -51,25 +43,11 @@ const IMG = {
   avatar1: "https://images.unsplash.com/photo-1575145053102-78eb0d5a0f7a?w=200&h=200&fit=crop&auto=format",
   avatar2: "https://images.unsplash.com/photo-1596963829984-c6b749a57108?w=200&h=200&fit=crop&auto=format",
   avatar3: "https://images.unsplash.com/photo-1562101074-ddc04071bdc8?w=200&h=200&fit=crop&auto=format",
-  // About Us team
-  team1: "https://images.unsplash.com/photo-1767339736147-676bd47eddb6?w=700&h=900&fit=crop&auto=format",
-  team2: "https://images.unsplash.com/photo-1758767355046-1986dda2d967?w=700&h=900&fit=crop&auto=format",
-  team3: "https://images.unsplash.com/photo-1676018366904-c083ed678e60?w=700&h=900&fit=crop&auto=format",
-  teamWide: "https://images.unsplash.com/photo-1771340012319-0b4fca008b54?w=1400&h=700&fit=crop&auto=format",
   // Contact facility
   facility: "https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?w=1200&h=800&fit=crop&auto=format",
 };
 
 // ─── Data ────────────────────────────────────────────────────────────────────
-const navLinks = [
-  { label: "Services", href: "services" },
-  { label: "Who We Serve", href: "who-we-serve" },
-  { label: "Testimonials", href: "testimonials" },
-  { label: "Certifications", href: "certifications" },
-  { label: "About Us", href: "about" },
-  { label: "Contact", href: "contact" },
-];
-
 const stats = [
   { value: "500K+", label: "Vehicles Restored" },
   { value: "98%", label: "Client Retention Rate" },
@@ -145,7 +123,6 @@ const testimonials = [
   },
 ];
 
-
 // ─── Utility ─────────────────────────────────────────────────────────────────
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
   const ref = useRef(null);
@@ -191,142 +168,6 @@ function SectionHeading({ children, light = false }: { children: React.ReactNode
     >
       {children}
     </h2>
-  );
-}
-
-// ─── Logo ────────────────────────────────────────────────────────────────────
-function Logo({ reversed = false }: { reversed?: boolean }) {
-  const textColor = reversed ? "#ffffff" : CHARCOAL;
-  return (
-    <div className="flex items-center gap-2.5" style={{ fontFamily: "Montserrat, sans-serif" }}>
-      <div className="flex items-center gap-2.5" style={{ fontFamily: "Montserrat, sans-serif" }}>
-        <img src="/ifs-logo.png" alt="IFS logo" width={130} className=" " />
-      </div>
-    </div>
-  );
-}
-
-// ─── CTA Button ──────────────────────────────────────────────────────────────
-function CTAButton({
-  children,
-  variant = "primary",
-  size = "md",
-  href,
-  onClick,
-  className = "",
-}: {
-  children: React.ReactNode;
-  variant?: "primary" | "outline" | "dark";
-  size?: "sm" | "md" | "lg";
-  href?: string;
-  onClick?: () => void;
-  className?: string;
-}) {
-  const sizes = { sm: "px-5 py-2.5 text-sm", md: "px-7 py-3.5 text-sm", lg: "px-9 py-[1.1rem] text-sm" };
-  const base = "inline-flex items-center gap-2 font-semibold tracking-wide transition-all duration-200 cursor-pointer select-none rounded-sm";
-
-  const styles: Record<string, React.CSSProperties> = {
-    primary: { background: EMERALD, color: "#fff" },
-    outline: { border: "1px solid rgba(255,255,255,0.35)", color: "#fff" },
-    dark: { background: CHARCOAL, color: "#fff" },
-  };
-  const hovers: Record<string, string> = {
-    primary: "hover:brightness-110 hover:shadow-lg active:scale-[0.98]",
-    outline: "hover:bg-white/10 active:scale-[0.98]",
-    dark: "hover:bg-neutral-800 active:scale-[0.98]",
-  };
-
-  const handleClick = onClick ?? (href ? () => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" }) : undefined);
-
-  return (
-    <button className={`${base} ${sizes[size]} ${hovers[variant]} ${className}`} style={styles[variant]} onClick={handleClick}>
-      {children}
-    </button>
-  );
-}
-
-// ─── NAV ─────────────────────────────────────────────────────────────────────
-function   Nav({ onNavigate, currentPage, onRequestEstimate }: { onNavigate: (page: string) => void; currentPage: string; onRequestEstimate: () => void }) {
-  const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 50);
-    window.addEventListener("scroll", fn, { passive: true });
-    return () => window.removeEventListener("scroll", fn);
-  }, []);
-
-  const handleLink = (href: string) => {
-    setOpen(false);
-    if (!href.startsWith("#")) {
-      // Page-level navigation
-      onNavigate(href);
-    } else {
-      if (currentPage !== "home") {
-        onNavigate("home");
-        setTimeout(() => document.querySelector(href)?.scrollIntoView({ behavior: "smooth" }), 120);
-      } else {
-        document.querySelector(href)?.scrollIntoView({ behavior: "smooth" });
-      }
-    }
-  };
-
-  return (
-    <header
-      className="fixed top-0 left-0 right-0 z-50 transition-all duration-500"
-      style={{
-        background: scrolled ? "rgba(17,17,17,0.96)" : "transparent",
-        backdropFilter: scrolled ? "blur(14px)" : "none",
-        borderBottom: scrolled ? "1px solid rgba(255,255,255,0.06)" : "1px solid transparent",
-      }}
-    >
-      <div className="max-w-7xl mx-auto px-6 lg:px-10 flex items-center justify-between" style={{ height: 72 }}>
-        <button onClick={() => onNavigate("home")} className="focus:outline-none">
-          <Logo reversed />
-        </button>
-
-        <nav className="hidden lg:flex items-center gap-8">
-          {navLinks.map((l) => (
-            <button
-              key={l.label}
-              onClick={() => handleLink(l.href)}
-              className="text-sm font-medium tracking-wide transition-colors duration-200 cursor-pointer text-white/55 hover:text-white"
-              style={{ color: (currentPage === l.href) ? "#fff" : "rgba(255,255,255,0.65)" }}
-            >
-              {l.label}
-            </button>
-          ))}
-        </nav>
-
-        <div className="hidden lg:flex items-center gap-5">
-          <a href="tel:2399197963" className="text-sm text-white/55 hover:text-white transition-colors flex items-center gap-1.5">
-            <Phone size={13} /> <span className="font-medium">239.919.7963</span>
-          </a>
-          <CTAButton onClick={onRequestEstimate} size="sm">
-            Get an Estimate <ArrowRight size={13} />
-          </CTAButton>
-        </div>
-
-        <button className="lg:hidden text-white/80 hover:text-white transition-colors" onClick={() => setOpen(!open)} aria-label="Toggle menu">
-          {open ? <X size={22} /> : <Menu size={22} />}
-        </button>
-      </div>
-
-      {open && (
-        <div className="lg:hidden" style={{ background: "rgba(17,17,17,0.98)", borderTop: "1px solid rgba(255,255,255,0.07)" }}>
-          <div className="px-6 py-6 flex flex-col gap-5">
-            {navLinks.map((l) => (
-              <button key={l.label} onClick={() => handleLink(l.href)} className="text-left text-sm font-medium text-white/65 hover:text-white transition-colors">
-                {l.label}
-              </button>
-            ))}
-            <div className="pt-4 border-t" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
-              <CTAButton onClick={onRequestEstimate} size="md">Get an Estimate <ArrowRight size={13} /></CTAButton>
-            </div>
-          </div>
-        </div>
-      )}
-    </header>
   );
 }
 
@@ -804,7 +645,6 @@ function Benefits() {
   );
 }
 
-
 // ─── TESTIMONIALS ────────────────────────────────────────────────────────────
 function Testimonials() {
   const [active, setActive] = useState(0);
@@ -950,26 +790,9 @@ function Contact() {
               call our emergency line for immediate deployment coordination.
             </p>
 
-            {/* Facility image */}
-            {/* <div className="overflow-hidden rounded-sm bg-gray-200 mb-8 relative" style={{ height: 260 }}>
-              <img
-                src={IMG.facility}
-                alt="IFS state-of-the-art PDR repair facility with polished floors and modern equipment"
-                className="w-full h-full object-cover"
-                style={{ filter: "brightness(0.85)" }}
-              />
-              <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,17,0.55) 0%, transparent 50%)" }} />
-              <div className="absolute bottom-5 left-5">
-                <span className="text-white text-xs font-semibold tracking-wider uppercase" style={{ fontFamily: "Montserrat, sans-serif" }}>
-                  IFS Fleet Repair Facility
-                </span>
-              </div>
-            </div> */}
-
             <div className="space-y-4">
               {[
                 { icon: Phone, label: "Main Line", val: "239.919.7963" },
-                // { icon: Phone, label: "Emergency Hail Response", val: "1-800-IFS-911" },
                 { icon: Mail, label: "Enterprise Inquiries", val: "info@ifshail.com" },
                 { icon: MapPin, label: "Headquarters", val: "Dallas, TX — with 48-state coverage" },
               ].map(({ icon: Icon, label, val }) => (
@@ -1009,8 +832,8 @@ function Contact() {
                   <form onSubmit={submit} className="space-y-4">
                     <div className="grid grid-cols-2 gap-4">
                       {[
-                        { key: "name", label: "Full Name", placeholder: "James Harlow", col: 1 },
-                        { key: "company", label: "Company / Organization", placeholder: "Acme Fleet Corp.", col: 1 },
+                        { key: "name", label: "Full Name", placeholder: "James Harlow" },
+                        { key: "company", label: "Company / Organization", placeholder: "Acme Fleet Corp." },
                       ].map((f) => (
                         <div key={f.key}>
                           <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>{f.label}</label>
@@ -1021,7 +844,7 @@ function Contact() {
                             onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
                             required
                             className="w-full px-4 py-3 text-sm rounded-sm border outline-none focus:ring-2 transition-all"
-                            style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif", focusRingColor: EMERALD } as React.CSSProperties}
+                            style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }}
                           />
                         </div>
                       ))}
@@ -1106,280 +929,20 @@ function CTABand({ onRequestEstimate }: { onRequestEstimate: () => void }) {
   );
 }
 
-// ─── FOOTER ──────────────────────────────────────────────────────────────────
-function Footer({ onNavigate }: { onNavigate: (page: string) => void }) {
-  const [openSections, setOpenSections] = useState<Record<string, boolean>>({});
-  const companyLinks: { label: string; href: string }[] = [
-    { label: "About Us", href: "about" },
-    { label: "Who We Serve", href: "who-we-serve" },
-    { label: "Testimonials", href: "testimonials" },
-    { label: "Certifications", href: "certifications" },
-    { label: "Contact", href: "contact" },
-  ];
-  const cols: Record<string, string[]> = {
-    Services: ["Hail Event Response", "Fleet Repair Programs", "Paintless Dent Repair", "Dealership Partnerships", "OEM Programs"],
-    Company: ["About IFS", "Leadership Team", "Certifications", "Careers", "Press"],
-    // Resources: ["Case Studies", "Event Response Guide", "Industry Reports", "FAQs", "Blog"],
-    Contact: ["Get an Estimate", "239.919.7963", "info@ifshail.com", "Find a Location", "Emergency Line"],
-  };
-
-  const toggle = (section: string) =>
-    setOpenSections((prev) => ({ ...prev, [section]: !prev[section] }));
-
-  return (
-    <footer style={{ background: "#0a0a0a" }}>
-      <div className="max-w-7xl mx-auto px-6 lg:px-10">
-        <div className="py-16 border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-          <div className="grid lg:grid-cols-4 gap-12">
-            {/* Brand column — same on all screens */}
-            <div className="lg:col-span-1">
-              <Logo reversed />
-              <p className="text-white/50 text-xs leading-relaxed mt-5 max-w-[180px]" style={{ fontFamily: "Inter, sans-serif" }}>
-                The enterprise standard for catastrophic hail recovery and paintless dent repair.
-              </p>
-              <div className="flex items-center gap-3 mt-5">
-                {/* <div className="w-8 h-8 rounded-sm flex items-center justify-center text-xs font-black" style={{ background: "rgba(45,138,107,0.15)", color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>A+</div>
-                <span className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>BBB Accredited</span> */}
-                <img src="/blue-seal.png" alt="Better Business Bureau Accredited" className="h-12" />
-              </div>
-            </div>
-
-            {/* Desktop: normal grid columns */}
-            <div className="hidden lg:contents">
-              {Object.entries(cols).map(([section, links]) => (
-                <div key={section}> 
-                  <h4 className="text-xs font-semibold tracking-[0.18em] uppercase mb-5" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>{section}</h4>
-
-                  <ul className="space-y-3">
-                    {section === "Company"
-                      ? companyLinks.map((l) => (
-                        <li key={l.label}>
-                          <button
-                            onClick={() => { onNavigate(l.href); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left cursor-pointer"
-                            style={{ fontFamily: "Inter, sans-serif" }}
-                          >
-                            {l.label}
-                          </button>
-                        </li>
-                      ))
-                      : links.map((l) => (
-                        <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors cursor-pointer" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
-                      ))
-                    }
-                  </ul>
-                </div>
-              ))}
-            </div>
-
-            {/* Mobile: accordion */}
-            <div className="lg:hidden col-span-full border-t" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-              {Object.entries(cols).map(([section, links]) => (
-                <div key={section} className="border-b" style={{ borderColor: "rgba(255,255,255,0.06)" }}>
-                  <button
-                    onClick={() => toggle(section)}
-                    className="w-full flex items-center justify-between py-4"
-                  >
-                    <h4 className="text-xs font-semibold tracking-[0.18em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>
-                      {section}
-                    </h4>
-                    <svg
-                      className="w-4 h-4 text-white/40 transition-transform duration-250"
-                      style={{ transform: openSections[section] ? "rotate(180deg)" : "rotate(0deg)" }}
-                      fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                    >
-                      <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                    </svg>
-                  </button>
-
-                  <div
-                    className="overflow-hidden transition-all duration-300"
-                    style={{ maxHeight: openSections[section] ? "400px" : "0px" }}
-                  >
-                    <ul className="space-y-3 pb-4">
-                       {section === "Company"
-                      ? companyLinks.map((l) => (
-                        <li key={l.label}>
-                          <button
-                            onClick={() => { onNavigate(l.href); window.scrollTo({ top: 0, behavior: "smooth" }); }}
-                            className="text-xs text-white/50 hover:text-white/65 transition-colors text-left"
-                            style={{ fontFamily: "Inter, sans-serif" }}
-                          >
-                            {l.label}
-                          </button>
-                        </li>
-                      ))
-                      : links.map((l) => (
-                        <li key={l}><a href="#" className="text-xs text-white/50 hover:text-white/65 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{l}</a></li>
-                      ))
-                    }
-                    </ul>
-                  </div>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
-
-        <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <p className="text-white/50 text-xs" style={{ fontFamily: "Inter, sans-serif" }}>© 2026 International Fleet Solutions. All rights reserved.</p>
-          <div className="flex gap-6">
-            {["Privacy Policy", "Terms of Service", "Accessibility"].map((i) => (
-              <a key={i} href="#" className="text-white/50 text-xs hover:text-white/45 transition-colors" style={{ fontFamily: "Inter, sans-serif" }}>{i}</a>
-            ))}
-          </div>
-        </div>
-      </div>
-    </footer>
-  );
-}
-
 // ─── ROOT ────────────────────────────────────────────────────────────────────
-export default function App() {
-  type Page = "home" | "services" | "who-we-serve" | "testimonials" | "certifications" | "about" | "contact";
-  const [page, setPage] = useState<Page>("home");
-  const [modalOpen, setModalOpen] = useState(false);
-  const [sent, setSent] = useState(false);
-  const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
-
-  const navigate = (target: string) => {
-    const pages: Page[] = ["services", "who-we-serve", "testimonials", "certifications", "about", "contact"];
-    if (pages.includes(target as Page)) {
-      setPage(target as Page);
-      window.scrollTo({ top: 0, behavior: "smooth" });
-    } else {
-      setPage("home");
-    }
-  };
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
-  const goToContact = () => {
-    setPage("contact");
-    window.scrollTo({ top: 0, behavior: "smooth" });
-  };
+export default function Home() {
+  const { open: openEstimateModal } = useEstimateModal();
 
   return (
-    <div className="min-h-screen" style={{ fontFamily: "Inter, sans-serif" }}>
-      <Nav onNavigate={navigate} currentPage={page} onRequestEstimate={() => setModalOpen(true)} />
-
-      {page === "services" && <><ServicesPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
-      {page === "who-we-serve" && <><WhoWeServePage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
-      {page === "testimonials" && <><TestimonialsPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
-      {page === "certifications" && <><CertificationsPage onGetEstimate={goToContact} /><Footer onNavigate={navigate} /></>}
-      {page === "about" && <><AboutPage onGoHome={goToContact} /><Footer onNavigate={navigate} /></>}
-      {page === "contact" && <><ContactPage /><Footer onNavigate={navigate} /></>}
-      {page === "home" && (
-        <main>
-          <Hero onRequestEstimate={() => setModalOpen(true)} />
-          <StatsBar />
-          <Services />
-          <WhoWeServe onRequestEstimate={() => setModalOpen(true)} />
-          <Benefits />
-          <Testimonials />
-          <Contact />
-          <CTABand onRequestEstimate={() => setModalOpen(true)} />
-          <Footer onNavigate={navigate} />
-        </main>
-      )}
-
-      {
-        modalOpen && (
-          <div
-            className="fixed inset-0 z-50 flex items-center justify-center p-4"
-            style={{ background: "rgba(0,0,0,0.6)", backdropFilter: "blur(4px)" }}
-            onClick={(e) => e.target === e.currentTarget && setModalOpen(false)}
-          >
-            <div
-              className="relative w-full max-w-xl max-h-[90vh] overflow-y-auto rounded-sm"
-              style={{ background: "#fff" }}
-            >
-              {/* Header */}
-              <div className="flex items-center justify-between px-2 lg:px-8 py-4 border-b" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-                <div>
-                  <h2 className="text-lg font-bold" style={{ color: CHARCOAL, fontFamily: "Montserrat, sans-serif" }}>
-                    Request an Estimate
-                  </h2>
-                  <p className="text-xs mt-0.5" style={{ color: "#888", fontFamily: "Inter, sans-serif" }}>
-                    Enterprise fleet & hail recovery
-                  </p>
-                </div>
-                <button
-                  onClick={() => setModalOpen(false)}
-                  className="w-8 h-8 flex items-center justify-center rounded-sm transition-colors hover:bg-black/5"
-                >
-                  <X size={16} color={CHARCOAL} />
-                </button>
-              </div>
-
-              {/* Form */}
-              <div className="px-2 lg:px-8 py-6">
-                {/* 👇 apna existing form yahan paste karo */}
-                <form onSubmit={submit} className="space-y-4">
-                  <div className="grid grid-cols-2 gap-4">
-                    {[
-                      { key: "name", label: "Full Name", placeholder: "James Harlow", col: 1 },
-                      { key: "company", label: "Company / Organization", placeholder: "Acme Fleet Corp.", col: 1 },
-                    ].map((f) => (
-                      <div key={f.key}>
-                        <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>{f.label}</label>
-                        <input
-                          type="text"
-                          placeholder={f.placeholder}
-                          value={form[f.key as keyof typeof form]}
-                          onChange={(e) => setForm({ ...form, [f.key]: e.target.value })}
-                          required
-                          className="w-full px-4 py-3 text-sm rounded-sm border outline-none focus:ring-2 transition-all"
-                          style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif", focusRingColor: EMERALD } as React.CSSProperties}
-                        />
-                      </div>
-                    ))}
-                  </div>
-                  <div className="grid grid-cols-2 gap-4">
-                    <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Email Address</label>
-                      <input type="email" placeholder="j.harlow@company.com" value={form.email} onChange={(e) => setForm({ ...form, email: e.target.value })} required className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }} />
-                    </div>
-                    <div>
-                      <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Phone Number</label>
-                      <input type="tel" placeholder="(555) 000-0000" value={form.phone} onChange={(e) => setForm({ ...form, phone: e.target.value })} className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }} />
-                    </div>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Estimated Fleet / Unit Count</label>
-                    <select value={form.fleet} onChange={(e) => setForm({ ...form, fleet: e.target.value })} className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all bg-white" style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif", color: form.fleet ? CHARCOAL : "#aaa" }}>
-                      <option value="" disabled>Select unit count</option>
-                      {["Under 50 units", "50–250 units", "250–1,000 units", "1,000–5,000 units", "5,000+ units"].map((o) => <option key={o} value={o}>{o}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-xs font-semibold mb-1.5" style={{ color: "#555", fontFamily: "Inter, sans-serif" }}>Tell Us About Your Situation</label>
-                    <textarea
-                      rows={4}
-                      placeholder="Describe the hail event, affected units, location, timeline requirements..."
-                      value={form.message}
-                      onChange={(e) => setForm({ ...form, message: e.target.value })}
-                      className="w-full px-4 py-3 text-sm rounded-sm border outline-none transition-all resize-none"
-                      style={{ borderColor: "rgba(0,0,0,0.12)", fontFamily: "Inter, sans-serif" }}
-                    />
-                  </div>
-                  <button
-                    type="submit"
-                    className="w-full flex items-center justify-center gap-2 py-3.5 text-sm font-semibold text-white rounded-sm transition-all hover:brightness-110 active:scale-[0.99]"
-                    style={{ background: EMERALD, fontFamily: "Montserrat, sans-serif" }}
-                  >
-                    Submit Enterprise Request <Send size={14} />
-                  </button>
-                  <p className="text-center text-xs" style={{ color: "#bbb", fontFamily: "Inter, sans-serif" }}>
-                    Response within 2 business hours · Emergency line available 24/7
-                  </p>
-                </form>
-              </div>
-            </div>
-          </div>
-        )
-      }
-    </div>
+    <main>
+      <Hero onRequestEstimate={openEstimateModal} />
+      <StatsBar />
+      <Services />
+      <WhoWeServe onRequestEstimate={openEstimateModal} />
+      <Benefits />
+      <Testimonials />
+      <Contact />
+      <CTABand onRequestEstimate={openEstimateModal} />
+    </main>
   );
 }

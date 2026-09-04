@@ -1,33 +1,15 @@
-import { useState, useEffect, useRef } from "react";
-import { motion, useInView } from "motion/react";
-import { Phone, Mail, MapPin, Clock, Send, CheckCircle, ArrowRight, Zap, Shield } from "lucide-react";
+"use client";
+
+import { useState, useEffect } from "react";
+import { motion } from "motion/react";
+import { Phone, Mail, MapPin, Clock, Send, CheckCircle, Zap } from "lucide-react";
 
 const EMERALD = "#2D8A6B";
 const CHARCOAL = "#111111";
 
 const IMG = {
   heroBg: "https://images.unsplash.com/photo-1645400379459-f6fd3d963fd4?w=1920&h=900&fit=crop&auto=format",
-  facility1: "https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?w=1000&h=700&fit=crop&auto=format",
-  facility2: "https://images.unsplash.com/photo-1771531072574-af6ed6b954c0?w=1000&h=700&fit=crop&auto=format",
-  meeting: "https://images.unsplash.com/photo-1714974528737-3e6c7e4d11af?w=900&h=600&fit=crop&auto=format",
 };
-
-function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-60px" });
-  return (
-    <motion.div ref={ref} initial={{ opacity: 0, y: 28 }} animate={inView ? { opacity: 1, y: 0 } : {}}
-      transition={{ duration: 0.65, delay, ease: [0.25, 0.46, 0.45, 0.94] }} className={className}>
-      {children}
-    </motion.div>
-  );
-}
-
-const offices = [
-  { city: "Dallas, TX", role: "National Headquarters", phone: "239.919.7963", address: "2100 Fleet Way, Dallas, TX 75201" },
-  { city: "Denver, CO", role: "Mountain Region Hub", phone: "239.919.7963", address: "580 Hail Response Dr, Denver, CO 80202" },
-  { city: "Atlanta, GA", role: "Southeast Region Hub", phone: "239.919.7963", address: "940 Fleet Center Blvd, Atlanta, GA 30301" },
-];
 
 export default function ContactPage() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", service: "", message: "" });
@@ -86,8 +68,8 @@ export default function ContactPage() {
         <div className="max-w-7xl mx-auto px-6 lg:px-10">
           <div className="grid lg:grid-cols-2 gap-16">
 
-            {/* Left: info + facility */}
-            <FadeUp>
+            {/* Left: info */}
+            <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.65, ease: [0.25, 0.46, 0.45, 0.94] }}>
               <div className="flex items-center gap-3 mb-4">
                 <div className="w-8 h-px" style={{ background: EMERALD }} />
                 <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Get In Touch</span>
@@ -103,7 +85,6 @@ export default function ContactPage() {
               <div className="space-y-4 mb-10">
                 {[
                   { icon: Phone, label: "Main Enterprise Line", val: "239.919.7963", sub: "Mon–Fri 7am–8pm CT" },
-                  // { icon: Zap, label: "Emergency Hail Response", val: "1-800-IFS-911", sub: "24/7 · Active events only" },
                   { icon: Mail, label: "Enterprise Inquiries", val: "info@ifshail.com", sub: "Response within 2 business hours" },
                   { icon: MapPin, label: "Headquarters", val: "Dallas, TX", sub: "With offices in Denver & Atlanta" },
                   { icon: Clock, label: "Response Guarantee", val: "< 2 Business Hours", sub: "Enterprise estimate response time" },
@@ -120,24 +101,10 @@ export default function ContactPage() {
                   </div>
                 ))}
               </div>
-
-              {/* Facility images */}
-              {/* <div className="grid grid-cols-2 gap-3">
-                <div className="overflow-hidden rounded-sm bg-gray-100 relative" style={{ height: 180 }}>
-                  <img src={IMG.facility1} alt="IFS primary repair facility" className="w-full h-full object-cover" style={{ filter: "brightness(0.82)" }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,17,0.5), transparent 60%)" }} />
-                  <span className="absolute bottom-4 left-4 text-white text-xs font-semibold tracking-wider" style={{ fontFamily: "Montserrat, sans-serif" }}>Dallas HQ</span>
-                </div>
-                <div className="overflow-hidden rounded-sm bg-gray-100 relative" style={{ height: 180 }}>
-                  <img src={IMG.facility2} alt="IFS facility interior" className="w-full h-full object-cover" style={{ filter: "brightness(0.75)" }} />
-                  <div className="absolute inset-0" style={{ background: "linear-gradient(to top, rgba(17,17,17,0.5), transparent 60%)" }} />
-                  <span className="absolute bottom-4 left-4 text-white text-xs font-semibold tracking-wider" style={{ fontFamily: "Montserrat, sans-serif" }}>Repair Bay</span>
-                </div>
-              </div> */}
-            </FadeUp>
+            </motion.div>
 
             {/* Right: form */}
-            <FadeUp delay={0.14}>
+            <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.65, delay: 0.14, ease: [0.25, 0.46, 0.45, 0.94] }}>
               {/* Tab switcher */}
               <div className="flex border-b mb-8" style={{ borderColor: "rgba(0,0,0,0.1)" }}>
                 {([["general", "General Inquiry"], ["emergency", "Emergency Response"]] as const).map(([id, label]) => (
@@ -242,70 +209,10 @@ export default function ContactPage() {
                   </>
                 )}
               </div>
-            </FadeUp>
+            </motion.div>
           </div>
         </div>
       </section>
-
-      {/* Regional offices */}
-      {/* <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <FadeUp className="mb-12">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-px" style={{ background: EMERALD }} />
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Our Locations</span>
-            </div>
-            <h2 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em" }}>
-              Nationwide. <span style={{ color: EMERALD }}>Always Close.</span>
-            </h2>
-            <p className="mt-3 text-sm leading-relaxed" style={{ color: "#777", fontFamily: "Inter, sans-serif", maxWidth: 480 }}>
-              Three regional hubs plus a 48-state deployment network means IFS can reach your fleet wherever it operates.
-            </p>
-          </FadeUp>
-
-          <div className="grid md:grid-cols-3 gap-5">
-            {offices.map((o, i) => (
-              <FadeUp key={o.city} delay={i * 0.08}>
-                <div className="bg-white border rounded-sm p-7 hover:shadow-md transition-shadow" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-                  <div className="flex items-start gap-4 mb-4">
-                    <div className="w-10 h-10 flex items-center justify-center rounded-sm flex-shrink-0" style={{ background: "rgba(45,138,107,0.09)" }}>
-                      <MapPin size={18} style={{ color: EMERALD }} />
-                    </div>
-                    <div>
-                      <h3 className="font-bold" style={{ fontFamily: "Montserrat, sans-serif", color: CHARCOAL }}>{o.city}</h3>
-                      <p className="text-xs" style={{ color: EMERALD, fontFamily: "Inter, sans-serif" }}>{o.role}</p>
-                    </div>
-                  </div>
-                  <div className="space-y-2 text-sm" style={{ fontFamily: "Inter, sans-serif", color: "#777" }}>
-                    <p className="flex items-center gap-2"><Phone size={12} style={{ color: EMERALD }} /> {o.phone}</p>
-                    <p className="flex items-start gap-2"><MapPin size={12} className="flex-shrink-0 mt-0.5" style={{ color: EMERALD }} /> {o.address}</p>
-                  </div>
-                </div>
-              </FadeUp>
-            ))}
-          </div>
- 
-          <FadeUp className="mt-8">
-            <div className="rounded-sm p-8 flex flex-col sm:flex-row items-center justify-between gap-6" style={{ background: CHARCOAL }}>
-              <div className="flex items-center gap-4">
-                <div className="w-14 h-14 flex items-center justify-center rounded-sm flex-shrink-0" style={{ background: "rgba(45,138,107,0.15)" }}>
-                  <Shield size={24} style={{ color: EMERALD }} />
-                </div>
-                <div>
-                  <div className="text-white font-black text-xl" style={{ fontFamily: "Montserrat, sans-serif" }}>48-State Coverage Network</div>
-                  <div className="text-white/45 text-sm" style={{ fontFamily: "Inter, sans-serif" }}>
-                    Rapid-deploy teams available from coast to coast — beyond our hub locations.
-                  </div>
-                </div>
-              </div>
-              <a href="tel:2399197963" className="flex-shrink-0 inline-flex items-center gap-2 px-6 py-3 text-sm font-bold rounded-sm transition-all hover:brightness-110"
-                style={{ background: EMERALD, color: "#fff", fontFamily: "Montserrat, sans-serif" }}>
-                <Phone size={13} /> 239.919.7963
-              </a>
-            </div>
-          </FadeUp>
-        </div>
-      </section> */}
     </div>
   );
 }

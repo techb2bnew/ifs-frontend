@@ -1,4 +1,7 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
 import { Star, ArrowRight, Phone, Quote, ChevronLeft, ChevronRight, FileText } from "lucide-react";
 
@@ -69,7 +72,9 @@ const CATEGORIES = ["All", "Fleet", "Dealership", "Rental", "Corporate", "OEM"];
 
 const recLetter = "The IFS team impressed me with their professionalism & expertise in this area, from the onset and through completion — including serving as our intermediary between the insurance company to ensure fairness in claims processed, and by quality control upon completion. It has been a sincere pleasure dealing with you and every member of your organization.";
 
-export default function TestimonialsPage({ onGetEstimate }: { onGetEstimate: () => void }) {
+export default function TestimonialsPage() {
+  const router = useRouter();
+  const onGetEstimate = () => router.push("/contact");
   const [filter, setFilter] = useState("All");
   const [featured, setFeatured] = useState(0);
 

@@ -1,4 +1,7 @@
+"use client";
+
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
 import {
   CheckCircle,
@@ -495,7 +498,8 @@ function AboutCTA({ onGoHome }: { onGoHome: () => void }) {
 }
 
 // ─── ABOUT PAGE ROOT ─────────────────────────────────────────────────────────
-export default function AboutPage({ onGoHome }: { onGoHome: () => void }) {
+export default function AboutPage() {
+  const router = useRouter();
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
 
   return (
@@ -505,7 +509,7 @@ export default function AboutPage({ onGoHome }: { onGoHome: () => void }) {
       <OurStory />
       <WhyChooseIFS />
       <ClientTestimonials />
-      <AboutCTA onGoHome={onGoHome} />
+      <AboutCTA onGoHome={() => router.push("/contact")} />
     </div>
   );
 }

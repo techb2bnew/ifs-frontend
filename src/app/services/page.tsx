@@ -1,8 +1,11 @@
+"use client";
+
 import { useState, useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
 import {
   Shield, Truck, Wrench, Building2, ArrowRight, CheckCircle,
-  Phone, ChevronDown, Zap, Clock, Award, Users, FileText, Star,
+  Phone, Zap, Clock, Award, Users, FileText, Star,
 } from "lucide-react";
 
 const EMERALD = "#2D8A6B";
@@ -36,7 +39,7 @@ function FadeUp({ children, delay = 0, className = "" }: { children: React.React
   );
 }
 
-function Eyebrow({ label, light = false }: { label: string; light?: boolean }) {
+function Eyebrow({ label }: { label: string; light?: boolean }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <div className="w-8 h-px" style={{ background: EMERALD }} />
@@ -506,28 +509,6 @@ function PDRSection({ onGetEstimate }: { onGetEstimate: () => void }) {
 
 // ─── SERVICE 4: DEALERSHIP PROGRAMS ──────────────────────────────────────────
 function DealershipSection({ onGetEstimate }: { onGetEstimate: () => void }) {
-  const tiers = [
-    {
-      name: "Essential",
-      tag: "Single-Point Dealers",
-      desc: "Priority scheduling, dedicated rep, and guaranteed capacity for single-location franchises that need consistent, reliable PDR without volume commitments.",
-      features: ["Priority scheduling", "Dedicated account rep", "Monthly reporting", "24/7 emergency line"],
-    },
-    {
-      name: "Enterprise",
-      tag: "Multi-Point Groups",
-      highlight: true,
-      desc: "Full-scale partnership for dealer groups with 3+ locations. Includes custom SLAs, centralized reporting, and proactive hail event planning.",
-      features: ["Custom SLA contracts", "Cross-location reporting", "Proactive hail planning", "Executive business reviews", "DMS integration", "Volume pricing"],
-    },
-    {
-      name: "OEM Certified",
-      tag: "Manufacturer Partners",
-      desc: "Designed for franchised dealers with OEM compliance requirements. All work meets manufacturer standards with full documentation packages.",
-      features: ["OEM certification compliance", "Full documentation package", "Warranty-safe procedures", "Manufacturer reporting"],
-    },
-  ];
-
   return (
     <div>
       <section className="py-10 lg:py-15 bg-white">
@@ -560,43 +541,6 @@ function DealershipSection({ onGetEstimate }: { onGetEstimate: () => void }) {
               </div>
             </FadeUp>
           </div>
-
-          {/* Partnership tiers */}
-          {/* <FadeUp className="mb-10">
-            <Eyebrow label="Partnership Tiers" />
-            <h3 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.5rem, 2.5vw, 2rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em" }}>
-              A Program for Every Dealer.
-            </h3>
-          </FadeUp>
-          <div className="grid md:grid-cols-3 gap-5">
-            {tiers.map((tier, i) => (
-              <FadeUp key={tier.name} delay={i * 0.1}>
-                <div className="border rounded-sm p-8 h-full flex flex-col relative"
-                  style={{ borderColor: tier.highlight ? EMERALD : "rgba(0,0,0,0.08)", background: tier.highlight ? "rgba(45,138,107,0.03)" : "#fff" }}>
-                  {tier.highlight && (
-                    <div className="absolute top-0 left-0 right-0 h-0.5 rounded-t-sm" style={{ background: EMERALD }} />
-                  )}
-                  <Tag label={tier.tag} />
-                  <h4 className="text-xl font-black mt-3 mb-3" style={{ fontFamily: "Montserrat, sans-serif", color: CHARCOAL }}>{tier.name}</h4>
-                  <p className="text-sm leading-relaxed mb-6 flex-1" style={{ color: "#777", fontFamily: "Inter, sans-serif" }}>{tier.desc}</p>
-                  <ul className="space-y-2.5 mb-8">
-                    {tier.features.map((f) => (
-                      <li key={f} className="flex items-center gap-2.5 text-sm" style={{ fontFamily: "Inter, sans-serif", color: "#555" }}>
-                        <CheckCircle size={13} style={{ color: EMERALD, flexShrink: 0 }} /> {f}
-                      </li>
-                    ))}
-                  </ul>
-                  <button onClick={onGetEstimate}
-                    className="w-full py-3 text-sm font-semibold rounded-sm transition-all border"
-                    style={tier.highlight
-                      ? { background: EMERALD, color: "#fff", borderColor: EMERALD, fontFamily: "Montserrat, sans-serif" }
-                      : { background: "transparent", color: CHARCOAL, borderColor: "rgba(0,0,0,0.15)", fontFamily: "Montserrat, sans-serif" }}>
-                    Request Info
-                  </button>
-                </div>
-              </FadeUp>
-            ))}
-          </div> */}
         </div>
       </section>
     </div>
@@ -639,8 +583,10 @@ function ServicesCTA({ onGetEstimate }: { onGetEstimate: () => void }) {
 }
 
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
-export default function ServicesPage({ onGetEstimate }: { onGetEstimate: () => void }) {
+export default function ServicesPage() {
+  const router = useRouter();
   const [activeTab, setActiveTab] = useState("hail");
+  const onGetEstimate = () => router.push("/contact");
 
   const switchTab = (id: string) => {
     setActiveTab(id);

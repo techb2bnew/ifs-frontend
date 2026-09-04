@@ -1,16 +1,16 @@
+"use client";
+
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
-import { Award, Shield, CheckCircle, Star, ArrowRight, Phone, Users, Wrench, FileText, Zap } from "lucide-react";
+import { Award, Shield, CheckCircle, Star, ArrowRight, Phone, Users, Wrench, FileText } from "lucide-react";
 
 const EMERALD = "#2D8A6B";
 const CHARCOAL = "#111111";
 
 const IMG = {
   heroBg: "https://images.unsplash.com/photo-1492144534655-ae79c964c9d7?w=1920&h=900&fit=crop&auto=format",
-  certs: "https://images.unsplash.com/photo-1576723420195-6ac9d4c71fe8?w=1000&h=700&fit=crop&auto=format",
-  certs2: "https://images.unsplash.com/photo-1576723420434-19d0e8be3b6a?w=1000&h=700&fit=crop&auto=format",
   tech: "https://images.unsplash.com/photo-1771340012319-0b4fca008b54?w=900&h=600&fit=crop&auto=format",
-  facility: "https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?w=1200&h=700&fit=crop&auto=format",
 };
 
 function FadeUp({ children, delay = 0, className = "" }: { children: React.ReactNode; delay?: number; className?: string }) {
@@ -76,7 +76,9 @@ const awards = [
   { year: "2019", title: "OEM Quality Excellence Award", org: "Auto Manufacturers Council", desc: "Awarded for consistent OEM-grade finish quality across multi-thousand-unit engagements." },
 ];
 
-export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: () => void }) {
+export default function CertificationsPage() {
+  const router = useRouter();
+  const onGetEstimate = () => router.push("/contact");
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
 
   return (
@@ -294,43 +296,6 @@ export default function CertificationsPage({ onGetEstimate }: { onGetEstimate: (
           </div>
         </div>
       </section>
-
-      {/* Facility image + CTA */}
-      {/* <section className="py-15 bg-white">
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <FadeUp>
-              <div className="overflow-hidden rounded-sm bg-gray-100" style={{ height: 360 }}>
-                <img src={IMG.facility} alt="IFS certified repair facility meeting OEM quality standards" className="w-full h-full object-cover" style={{ filter: "brightness(0.82)" }} />
-              </div>
-            </FadeUp>
-            <FadeUp delay={0.12}>
-              <div className="flex items-center gap-3 mb-4">
-                <div className="w-8 h-px" style={{ background: EMERALD }} />
-                <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Our Facilities</span>
-              </div>
-              <h2 className="mb-5" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.8rem, 3vw, 2.4rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em", lineHeight: 1.1 }}>
-                Certified Facilities.
-                <br /><span style={{ color: EMERALD }}>OEM-Grade Standards.</span>
-              </h2>
-              <p className="leading-relaxed mb-8" style={{ color: "#666", fontFamily: "Inter, sans-serif", lineHeight: 1.8 }}>
-                Every IFS facility operates to OEM-grade cleanliness, equipment, and process standards. From lighting specifications that ensure finish visibility to tool calibration protocols that protect paint surfaces — our facilities are built for the quality our certifications demand.
-              </p>
-              <div className="space-y-3 mb-8">
-                {["Climate-controlled repair environments", "OEM-specified lighting for finish inspection", "Calibrated tool maintenance program", "Dedicated QC inspection stations", "Secure lot management and vehicle tracking"].map(item => (
-                  <div key={item} className="flex items-center gap-2.5 text-sm" style={{ fontFamily: "Inter, sans-serif", color: "#555" }}>
-                    <CheckCircle size={14} style={{ color: EMERALD }} /> {item}
-                  </div>
-                ))}
-              </div>
-              <button onClick={onGetEstimate} className="inline-flex items-center gap-2 px-7 py-3.5 text-sm font-semibold text-white rounded-sm transition-all hover:brightness-110"
-                style={{ background: EMERALD, fontFamily: "Montserrat, sans-serif" }}>
-                Get an Enterprise Estimate <ArrowRight size={14} />
-              </button>
-            </FadeUp>
-          </div>
-        </div>
-      </section> */}
 
       {/* CTA Band */}
       <section className="py-15 relative overflow-hidden" style={{ background: EMERALD }}>

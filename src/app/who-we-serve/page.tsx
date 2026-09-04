@@ -1,4 +1,7 @@
+"use client";
+
 import { useEffect, useRef } from "react";
+import { useRouter } from "next/navigation";
 import { motion, useInView } from "motion/react";
 import { ArrowRight, CheckCircle, Phone, Shield, Truck, Building2, Users, Car, FileText } from "lucide-react";
 
@@ -101,7 +104,9 @@ const segments = [
   },
 ];
 
-export default function WhoWeServePage({ onGetEstimate }: { onGetEstimate: () => void }) {
+export default function WhoWeServePage() {
+  const router = useRouter();
+  const onGetEstimate = () => router.push("/contact");
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
 
   return (

@@ -767,10 +767,20 @@ function Contact() {
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
   const [sent, setSent] = useState(false);
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
+  const submit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, subject: `New Contact Form Submission — ${form.name}` }),
+    });
+    if (res.ok) setSent(true);
+    else alert("Something went wrong. Please try again.");
+  } catch {
+    alert("Something went wrong. Please try again.");
+  }
+};
 
   return (
     <section id="contact" className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>

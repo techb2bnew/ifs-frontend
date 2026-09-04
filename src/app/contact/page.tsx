@@ -18,7 +18,20 @@ export default function ContactPage() {
 
   useEffect(() => { window.scrollTo({ top: 0, behavior: "smooth" }); }, []);
 
-  const submit = (e: React.FormEvent) => { e.preventDefault(); setSent(true); };
+const submit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify(form),
+    });
+    if (res.ok) setSent(true);
+    else alert("Something went wrong. Please try again.");
+  } catch {
+    alert("Something went wrong. Please try again.");
+  }
+};
   const field = (key: string) => form[key as keyof typeof form];
   const set = (key: string, val: string) => setForm(f => ({ ...f, [key]: val }));
 

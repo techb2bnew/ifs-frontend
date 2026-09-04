@@ -19,10 +19,20 @@ export function EstimateModalProvider({ children }: { children: ReactNode }) {
   const [sent, setSent] = useState(false);
   const [form, setForm] = useState({ name: "", company: "", email: "", phone: "", fleet: "", message: "" });
 
-  const submit = (e: React.FormEvent) => {
-    e.preventDefault();
-    setSent(true);
-  };
+  const submit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  try {
+    const res = await fetch("/api/contact", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ ...form, subject: `New Estimate Request — ${form.name}` }),
+    });
+    if (res.ok) setSent(true);
+    else alert("Something went wrong. Please try again.");
+  } catch {
+    alert("Something went wrong. Please try again.");
+  }
+};
 
   return (
     <EstimateModalContext.Provider value={{ open: () => setModalOpen(true) }}>

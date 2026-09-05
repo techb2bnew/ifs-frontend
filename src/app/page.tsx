@@ -703,48 +703,36 @@ function Testimonials() {
         </FadeUp>
 
         {/* Testimonial slider */}
-        <FadeUp>
-          <div className="rounded-sm overflow-hidden" style={{ background: CHARCOAL }}>
-            <div className="grid lg:grid-cols-3">
-
-              {/* Customer photo panel */}
-              <div className="relative overflow-hidden bg-gray-800" style={{ minHeight: 340 }}>
-                <img
-                  key={t.avatar}
-                  src={t.avatar}
-                  alt={`${t.name} — satisfied IFS client`}
-                  className="w-full h-full object-cover object-top"
-                  style={{ filter: "brightness(0.7) grayscale(0.2)", transition: "opacity 0.4s" }}
-                />
-                <div className="absolute inset-0" style={{ background: "linear-gradient(to right, transparent 60%, rgba(17,17,17,0.7))" }} />
-                {/* Emerald left bar */}
-                <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: EMERALD }} />
-              </div>
+        <FadeUp className="max-w-3xl mx-auto">
+          <div className="rounded-2xl overflow-hidden" style={{ background: CHARCOAL, height: 360 }}>
+            <div className="grid lg:grid-cols-3 h-full">
 
               {/* Quote panel */}
-              <div className="lg:col-span-2 p-10 lg:p-12 flex flex-col justify-between">
+              <div className="lg:col-span-3 p-6 lg:p-8 flex flex-col justify-between relative h-full">
+                {/* Emerald left bar */}
+                <div className="absolute left-0 top-0 bottom-0 w-1" style={{ background: EMERALD }} />
                 <div>
-                  <div className="flex gap-1 mb-6">
+                  <div className="flex gap-1 mb-4">
                     {[...Array(t.rating)].map((_, i) => (
                       <Star key={i} size={14} fill={EMERALD} style={{ color: EMERALD }} />
                     ))}
                   </div>
                   <blockquote
-                    className="text-white/82 leading-relaxed mb-8"
+                    className="text-white/82 leading-relaxed mb-6 line-clamp-4"
                     style={{ fontFamily: "Inter, sans-serif", fontSize: "clamp(1rem, 1.4vw, 1.1rem)", lineHeight: 1.8 }}
                   >
                     &ldquo;{t.quote}&rdquo;
                   </blockquote>
                   <div>
-                    <div className="text-sm font-bold text-white" style={{ fontFamily: "Montserrat, sans-serif" }}>{t.name}</div>
-                    <div className="text-xs mt-0.5" style={{ color: "#888", fontFamily: "Inter, sans-serif" }}>
+                    <div className="text-sm font-bold text-white line-clamp-1" style={{ fontFamily: "Montserrat, sans-serif" }}>{t.name}</div>
+                    <div className="text-xs mt-0.5 line-clamp-1" style={{ color: "#888", fontFamily: "Inter, sans-serif" }}>
                       {t.title} — {t.company}
                     </div>
                   </div>
                 </div>
 
                 {/* Controls */}
-                <div className="flex items-center gap-4 mt-10">
+                <div className="flex items-center gap-4 mt-8">
                   <div className="flex gap-2">
                     {testimonials.map((_, i) => (
                       <button

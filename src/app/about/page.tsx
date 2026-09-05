@@ -336,16 +336,28 @@ function WhyChooseIFS() {
 }
 
 // ─── TESTIMONIALS ─────────────────────────────────────────────────────────────
-const philLongQuote =
-  "When it comes to hail repair, we choose International Fleet Solutions, Inc. (IFS) as our preferred vendor of choice. IFS brings a level of professionalism that we have come to count on for the last 5 years running. We strongly believe that if your dealership is affected by a hail storm, you would be well served by hiring International Fleet Solutions, Inc. to handle the repairs.";
-
 const recLetterQuote =
   "The IFS team impressed me with their professionalism & expertise in this area, from the onset and through completion — including serving as our intermediary between the insurance company to ensure fairness in claims processed, and by quality control upon completion. It has been a sincere pleasure dealing with you and every member of your organization.";
 
 const clientTestimonials = [
-  { quote: philLongQuote, name: "Phil Long Dealerships", location: "Colorado Springs, CO", avatar: IMG.avatar2, initials: "PL" },
-  { quote: philLongQuote, name: "Phil Long Dealerships", location: "Colorado Springs, CO", avatar: IMG.avatar1, initials: "PL" },
-  { quote: philLongQuote, name: "Phil Long Dealerships", location: "Colorado Springs, CO", avatar: IMG.avatar3, initials: "PL" },
+  {
+    quote: "IFS handled over 4,200 units across our Midwest distribution centers after back-to-back hail events last spring. Their logistics, communication, and output quality were genuinely unprecedented. They're the only vendor we call.",
+    name: "Marcus W.",
+    location: "VP of Vehicle Operations — National Auto Distribution Corp.",
+    avatar: IMG.avatar2,
+  },
+  {
+    quote: "We've tried six PDR vendors in the last decade. International Fleet Solutions operates in a different category entirely. Their technicians, turnaround discipline, and account management make every other provider look amateur.",
+    name: "Sandra T.",
+    location: "Director of Fleet Asset Management — Summit Rental Group",
+    avatar: IMG.avatar1,
+  },
+  {
+    quote: "After a catastrophic hail event wiped out 1,800 units on our lot, IFS was on-site within 36 hours with a full crew. They delivered every vehicle on schedule. Our GM called it the most professional vendor experience in 20 years.",
+    name: "David K.",
+    location: "General Manager — Regional Automotive Group",
+    avatar: IMG.avatar3,
+  },
 ];
 
 function ClientTestimonials() {

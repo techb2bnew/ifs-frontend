@@ -321,53 +321,7 @@ export default function CertificationsPage() {
         </div>
       </section>
 
-      {/* Awards timeline */}
-      <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
-        <div className="max-w-7xl mx-auto px-6 lg:px-10">
-          <FadeUp className="mb-14">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-px" style={{ background: EMERALD }} />
-              <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Awards & Recognition</span>
-            </div>
-            <h2 style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(2rem, 3vw, 2.6rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em" }}>
-              Recognized by the
-              <br /><span style={{ color: EMERALD }}>Industry. Proven by Results.</span>
-            </h2>
-          </FadeUp>
-
-          <div className="relative">
-            <div className="hidden lg:block absolute left-[72px] top-0 bottom-0 w-px" style={{ background: "rgba(0,0,0,0.07)" }} />
-            <div className="space-y-5">
-              {awards.map((a, i) => (
-                <FadeUp key={`${a.year}-${a.title}`} delay={i * 0.07}>
-                  <div className="grid lg:grid-cols-[144px_1fr] gap-6 items-start">
-                    {/* Year */}
-                    <div className="hidden lg:flex items-center gap-4">
-                      <div className="text-2xl font-black" style={{ fontFamily: "Montserrat, sans-serif", color: EMERALD }}>{a.year}</div>
-                      <div className="w-3 h-3 rounded-full border-2 flex-shrink-0" style={{ background: "#fff", borderColor: EMERALD }} />
-                    </div>
-                    {/* Card */}
-                    <div className="bg-white border rounded-sm p-6 hover:shadow-sm transition-shadow" style={{ borderColor: "rgba(0,0,0,0.08)" }}>
-                      <div className="flex items-start gap-3 mb-2">
-                        <Award size={16} className="flex-shrink-0 mt-0.5" style={{ color: EMERALD }} />
-                        <div>
-                          <div className="flex items-center gap-3 flex-wrap">
-                            <span className="text-xs font-bold lg:hidden" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>{a.year}</span>
-                            <span className="text-xs text-gray-400" style={{ fontFamily: "Inter, sans-serif" }}>{a.org}</span>
-                          </div>
-                          <h4 className="font-bold mt-0.5 mb-1.5" style={{ fontFamily: "Montserrat, sans-serif", color: CHARCOAL }}>{a.title}</h4>
-                          <p className="text-sm leading-relaxed" style={{ color: "#777", fontFamily: "Inter, sans-serif" }}>{a.desc}</p>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </FadeUp>
-              ))}
-            </div>
-          </div>
-        </div>
-      </section>
-
+      
       {/* CTA Band */}
       <section className="py-15 relative overflow-hidden" style={{ background: EMERALD }}>
         <div className="absolute inset-0 opacity-[0.06]" style={{ backgroundImage: "repeating-linear-gradient(45deg, rgba(0,0,0,0.4) 0px, rgba(0,0,0,0.4) 1px, transparent 1px, transparent 12px)" }} />

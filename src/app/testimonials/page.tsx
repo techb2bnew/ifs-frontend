@@ -43,7 +43,7 @@ const ALL_TESTIMONIALS = [
     name: "David K.", title: "General Manager", company: "Regional Automotive Group — 12 Locations", location: "Denver, CO", rating: 5, avatar: IMG.a3, category: "Dealership",
   },
   {
-    quote: "When it comes to hail repair, we choose International Fleet Solutions, Inc. (IFS) as our preferred vendor of choice. IFS brings a level of professionalism that we have come to count on for the last 5 years running.",
+    quote: "When it comes to hail repair, we choose International Fleet Solutions, Inc. (IFS) as our preferred vendor of choice. IFS brings a level of professionalism that we have come to count on for the last 5 years running. We strongly believe that if your dealership is affected by a hail storm, you would be well served by hiring International Fleet Solutions, Inc. to handle the repairs.",
     name: "Phil Long", title: "Owner", company: "Phil Long Dealerships", location: "Colorado Springs, CO", rating: 5, avatar: IMG.a4, category: "Dealership",
   },
   {

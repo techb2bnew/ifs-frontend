@@ -170,6 +170,77 @@ export default function CertificationsPage() {
               </FadeUp>
             ))}
           </div>
+
+        </div>
+      </section>
+
+      {/* Why IFS + Certificate */}
+      <section className="py-10 lg:py-15" style={{ background: "#f7f8f9" }}>
+        <div className="max-w-7xl mx-auto px-6 lg:px-10">
+          <div className="grid lg:grid-cols-2 gap-16 items-center">
+            {/* Left: text */}
+            <FadeUp>
+              <div className="flex items-center gap-3 mb-4">
+                <span className="text-xs font-semibold tracking-[0.2em] uppercase" style={{ color: EMERALD, fontFamily: "Montserrat, sans-serif" }}>Why IFS</span>
+                <div className="w-8 h-px" style={{ background: EMERALD }} />
+              </div>
+              <h2 className="mb-5" style={{ fontFamily: "Montserrat, sans-serif", fontSize: "clamp(1.9rem, 3vw, 2.4rem)", fontWeight: 800, color: CHARCOAL, letterSpacing: "-0.02em", lineHeight: 1.15 }}>
+                Why International Fleet Solutions
+              </h2>
+              <p className="leading-relaxed mb-6" style={{ color: "#666", fontFamily: "Inter, sans-serif", lineHeight: 1.8 }}>
+                When a hailstorm damages a large inventory, it is critical to work with a knowledgeable and experienced
+                company — one that can get you back up and running as quickly and efficiently as possible. At IFS, our
+                team of professionals moves quickly and will arrive within hours to help assess damage.
+              </p>
+
+              <div className="rounded-sm border p-6" style={{ borderColor: EMERALD }}>
+                <p className="font-bold mb-4" style={{ fontFamily: "Montserrat, sans-serif", color: CHARCOAL }}>
+                  What you can expect when working with IFS:
+                </p>
+                <div className="space-y-3 mb-6">
+                  {[
+                    { icon: Users, label: "Experts on-site" },
+                    { icon: FileText, label: "Work directly with claim adjusters" },
+                    { icon: Wrench, label: "Ensure we repair the damaged inventory" },
+                    { icon: Award, label: "Highly trained and proven technicians" },
+                  ].map((item) => {
+                    const Icon = item.icon;
+                    return (
+                      <div key={item.label} className="flex items-center gap-3">
+                        <div className="w-7 h-7 flex-shrink-0 flex items-center justify-center rounded-sm" style={{ background: "rgba(45,138,107,0.09)" }}>
+                          <Icon size={14} style={{ color: EMERALD }} />
+                        </div>
+                        <span className="text-sm font-semibold" style={{ fontFamily: "Inter, sans-serif", color: CHARCOAL }}>{item.label}</span>
+                      </div>
+                    );
+                  })}
+                </div>
+                {/* <button
+                  onClick={onGetEstimate}
+                  className="inline-flex items-center gap-2 px-6 py-3 text-sm font-bold text-white rounded-sm transition-all hover:brightness-110"
+                  style={{ background: EMERALD, fontFamily: "Montserrat, sans-serif" }}
+                >
+                  Read More <ArrowRight size={14} />
+                </button> */}
+              </div>
+            </FadeUp>
+
+            {/* Right: certificate */}
+            <FadeUp delay={0.15} className="flex flex-col items-center text-center">
+              <img
+                src="/certificate.png"
+                alt="BBB Certificate of Accreditation — International Fleet Solutions"
+                className="max-w-xl w-full"
+              />
+              {/* <a
+                href="#"
+                className="text-sm font-semibold mt-5 leading-relaxed hover:underline"
+                style={{ color: EMERALD, fontFamily: "Inter, sans-serif", textDecoration: "underline" }}
+              >
+                Read our Better Business Bureau &lsquo;Complaint Free&rsquo; Letter
+              </a> */}
+            </FadeUp>
+          </div>
         </div>
       </section>
 

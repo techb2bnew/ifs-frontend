@@ -43,6 +43,7 @@ const IMG = {
   avatar1: "https://images.unsplash.com/photo-1575145053102-78eb0d5a0f7a?w=200&h=200&fit=crop&auto=format",
   avatar2: "https://images.unsplash.com/photo-1596963829984-c6b749a57108?w=200&h=200&fit=crop&auto=format",
   avatar3: "https://images.unsplash.com/photo-1562101074-ddc04071bdc8?w=200&h=200&fit=crop&auto=format",
+  avatar4: "https://images.unsplash.com/photo-1737649316494-6a32b7fda654?w=200&h=200&fit=crop&auto=format",
   // Contact facility
   facility: "https://images.unsplash.com/photo-1771530789155-b1f03fbf82b5?w=1200&h=800&fit=crop&auto=format",
 };
@@ -94,6 +95,16 @@ const benefits = [
 ];
 
 const testimonials = [
+  // {
+  //   quote: "When it comes to hail repair, we choose International Fleet Solutions, Inc. (IFS) as our preferred vendor of choice. IFS brings a level of professionalism that we have come to count on for the last 5 years running. We strongly believe that if your dealership is affected by a hail storm, you would be well served by hiring International Fleet Solutions, Inc. to handle the repairs.",
+  //   name: "Phil Long", 
+  //   title: "Owner", 
+  //   company: "Phil Long Dealerships", 
+  //   location: "Colorado Springs, CO", 
+  //   rating: 5, 
+  //   // avatar: IMG.a4, 
+  //   category: "Dealership",
+  // },
   {
     quote:
       "IFS handled over 4,200 units across our Midwest distribution centers after back-to-back hail events last spring. Their logistics, communication, and output quality were genuinely unprecedented. They're the only vendor we call.",
@@ -120,6 +131,15 @@ const testimonials = [
     company: "Regional Automotive Group — 12 Franchise Locations",
     rating: 5,
     avatar: IMG.avatar3,
+  },
+  {
+    quote:
+      "When it comes to hail repair, we choose International Fleet Solutions, Inc. (IFS) as our preferred vendor of choice. IFS brings a level of professionalism that we have come to count on for the last 5 years running. We strongly believe that if your dealership is affected by a hail storm, you would be well served by hiring International Fleet Solutions, Inc. to handle the repairs.",
+    name: "Phil Long",
+    title: "Owner",
+    company: "Phil Long Dealerships — Colorado Springs, CO",
+    rating: 5,
+    avatar: IMG.avatar4,
   },
 ];
 

@@ -120,7 +120,10 @@ const submit = async (e: React.FormEvent) => {
             <motion.div initial={{ opacity: 0, y: 28 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true, margin: "-60px" }} transition={{ duration: 0.65, delay: 0.14, ease: [0.25, 0.46, 0.45, 0.94] }}>
               {/* Tab switcher */}
               <div className="flex border-b mb-8" style={{ borderColor: "rgba(0,0,0,0.1)" }}>
-                {([["general", "General Inquiry"], ["emergency", "Emergency Response"]] as const).map(([id, label]) => (
+                {([
+                  ["general", "General Inquiry"],
+                  // ["emergency", "Emergency Response"], // commented out for now
+                ] as const).map(([id, label]) => (
                   <button key={id} onClick={() => { setTab(id); setSent(false); }}
                     className="px-6 py-3.5 text-sm font-semibold border-b-2 transition-all"
                     style={{
